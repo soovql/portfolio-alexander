@@ -1,0 +1,44 @@
+@import '../../styles/mixins.scss';
+
+.menuPopup {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(221.79deg, rgba(0, 0, 0, 0.9) 1.44%, rgba(0, 0, 0, 0.486) 85.3%);
+  transition: opacity 500ms, visibility 500ms;
+  opacity: 0;
+  visibility: hidden;
+
+  &-social {
+    // @todo how to calculate
+    padding-top: 81px;
+  }
+
+  &-text {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: #fff;
+    opacity: 0.15;
+    text-align: center;
+
+    @include tablet {
+      padding-top: 37px;
+    }
+
+    @include mobile {
+      padding-top: 25px;
+    }
+  }
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}

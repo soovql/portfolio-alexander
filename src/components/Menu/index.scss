@@ -1,0 +1,75 @@
+@import '../../styles/mixins.scss';
+
+.menu {
+    color: #fff;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      font-size: 20px;
+      line-height: 15px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+  @include desktop {
+    position: absolute;
+    bottom: 67px;
+    right: 67px;
+    text-align: right;
+
+    ul {
+      flex-direction: row;
+    }
+  }
+
+  @include mobile {
+    text-align: center;
+
+    ul {
+      flex-direction: column;
+    }
+
+    li + li {
+      margin-top: 50px;
+    }
+
+    li {
+      font-size: 25px;
+      line-height: 19px;
+    }
+  }
+
+  @include tablet {
+    text-align: center;
+
+    ul {
+      flex-direction: column;
+    }
+
+    li + li {
+      margin-top: 50px;
+    }
+
+    li {
+      font-size: 25px;
+    }
+  }
+
+  @include desktop {
+    li + li {
+      margin-left: 45px;
+    }
+  }
+}
+

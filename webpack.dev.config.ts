@@ -1,0 +1,80 @@
+import * as path from "path";
+import * as webpack from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import ESLintPlugin from "eslint-webpack-plugin";
+
+
+const config: webpack.Configuration = {
+    mode: "development",
+    output: {
+        publicPath: "/",
+    },
+    entry: "./src/index.tsx",
+    module: {
+        rules: [
+            {
+                test: /\.(ts|js)x?$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react",
+                            "@babel/preset-typescript",
+                        ],
+                    },
+                },
+            },
+            {
+                test: /\.(scss|css)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                            context: path.resolve(__dirname, "src/"),
+                            outputPath: 'dist/'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.svg/,
+                use: {
+                    loader: "svg-url-loader",
+                    options: {
+                        // make all svg images to work in IE
+                        iesafe: true,
+                    },
+                },
+            }
+        ],
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "src/index.html",
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new ESLintPlugin({
+            extensions: ["js", "jsx", "ts", "tsx"],
+        }),
+    ],
+    devtool: "inline-source-map",
+    devServer: {
+        contentBase: path.join(__dirname, "build"),
+        historyApiFallback: true,
+        port: 4000,
+        open: true,
+        hot: true
+    },
+};
+
+export default config;

@@ -1,0 +1,63 @@
+@import '../../styles/mixins.scss';
+
+.burger {
+  position: absolute;
+  display: block;
+  height: 50px;
+  width: 50px;
+  background-color: #E5EDEF;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+  transition: background-color 500ms linear;
+
+  &.open {
+    background-color: transparent;
+  }
+
+  @include tablet {
+    top: 65px;
+    right: 65px;
+  }
+
+  @include mobile {
+    top: 40px;
+    right: 40px;
+  }
+
+  &-bar {
+    position: absolute;
+    left: 15px;
+    width: 20px;
+    height: 3px;
+    background: #FFFFFF;
+    border-radius: 1px;
+    transform: rotate(0);
+    transition: .5s ease-in-out;
+
+    &Container {
+      position: relative;
+    }
+
+    &:first-child {
+      top: 20px;
+    }
+
+    &:nth-child(2) {
+      top: 28px;
+    }
+  }
+
+  &.open {
+    .burger-bar {
+
+      &:first-child {
+        transform: translateY(5px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        transform: translateY(-3px) rotate(-45deg);
+      }
+    }
+  }
+}

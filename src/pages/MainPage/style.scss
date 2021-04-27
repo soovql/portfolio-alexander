@@ -1,0 +1,39 @@
+@import '../../components/Social/index.scss';
+@import '../../components/Menu/index.scss';
+@import '../../components/Burger/index.scss';
+@import '../../components/MenuPopup/index.scss';
+
+.mainPage {
+  position: relative;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &-social {
+    position: absolute;
+    bottom: 60px;
+    left: 65px;
+  }
+
+  &-menu, &-social {
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
+  }
+
+  &-menuPopup {
+
+    @include desktop {
+      display: none;
+    }
+  }
+
+  &-burger {
+
+    @include desktop {
+      display: none;
+    }
+  }
+}
