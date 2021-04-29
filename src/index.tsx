@@ -10,7 +10,7 @@ import {Order} from "./pages/Order";
 import {City} from "./pages/City";
 import {MainPage} from "./pages/MainPage";
 import 'normalize.css';
-
+import 'reset-css-complete/reset.css';
 import './style.scss';
 
 const App = () => (

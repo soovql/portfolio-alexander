@@ -4,13 +4,13 @@ import classNames from "classnames";
 import {Social} from "../Social";
 import {Menu} from "../Menu";
 
-type Props = {
+type IMenuPopupProps = {
     parentClass: string;
     open: boolean;
     setOpen: (v: boolean) => void;
 };
 
-const MenuPopup = React.forwardRef<HTMLDivElement, Props>(function MenuPopup(props, ref) {
+const MenuPopup = React.forwardRef<HTMLDivElement, IMenuPopupProps>(function MenuPopup(props, ref) {
 
     const {
         parentClass,
@@ -28,12 +28,20 @@ const MenuPopup = React.forwardRef<HTMLDivElement, Props>(function MenuPopup(pro
             className={classNames(rootClass(blockClass()), blockClass(), open && 'open')}
             ref={ref}
         >
-            <Menu parentClass={blockClass()}/>
-            <Social parentClass={blockClass()}/>
-            <div className={blockClass('text')}>
-                Фотограф Саша Стюхин <br/>
-                Все права защищены © {new Date().getFullYear()}
+            <Menu
+                parentClass={blockClass()}
+                auxClass={blockClass()}
+            />
+            <div className={blockClass('bottomWrapper')}>
+                <Social parentClass={blockClass()}/>
+                <div className={blockClass('text')}>
+                    Фотограф Саша Стюхин 
+                </div>
+                <div className={blockClass('text')}>
+                    Все права защищены © {new Date().getFullYear()}
+                </div>
             </div>
+
         </div>
     )
 });

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 @import 'styles/common.scss';
 @import 'pages/MainPage/style.scss';
+@import 'pages/Order/style.scss';
 
 body, html {
   font-family: 'Rubik', sans-serif;
@@ -18,4 +19,41 @@ ol,
 ul {
   padding: 0;
   margin: 0;
+}
+
+a.link {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -7px; // вместо -11px из-за высоты a элемента
+    width: 22px;
+    height: 1px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: width 0.5s ease-in-out, bottom .2s linear;
+  }
+
+  &:hover, &:active {
+    &:before {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  &:hover {
+    &:before {
+      bottom: -5px;
+    }
+  }
+
+  &:active {
+    &:before {
+      bottom: -3px;
+    }
+  }
+
 }

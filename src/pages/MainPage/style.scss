@@ -2,12 +2,14 @@
 @import '../../components/Menu/index.scss';
 @import '../../components/Burger/index.scss';
 @import '../../components/MenuPopup/index.scss';
+@import '../../components/Logo/style.scss';
 
 .mainPage {
   position: relative;
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 
   &-social {
     position: absolute;

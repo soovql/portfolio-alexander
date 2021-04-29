@@ -9,8 +9,12 @@ const Order: React.FC<Props> = (props) => {
         parentClass,
     } = props;
 
+    const blockClass = "order";
+
     return (
-        <div>
+        <div
+            className={blockClass}
+        >
             ORDER
         </div>
     )

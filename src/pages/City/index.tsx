@@ -5,10 +5,6 @@ type Props = {
 };
 
 const City: React.FC<Props> = (props) => {
-    const {
-        parentClass,
-    } = props;
-
     return (
         <div>
             City

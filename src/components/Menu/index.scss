@@ -7,18 +7,23 @@
       display: flex;
       flex-direction: column;
       list-style: none;
+    }
+
+    .link {
+      color: #fff;
+      text-decoration: none;
       font-size: 20px;
       line-height: 15px;
       font-weight: 300;
       letter-spacing: -0.03em;
-    }
-
-    a {
-      color: #fff;
-      text-decoration: none;
 
       &:hover {
         color: #fff;
+      }
+
+      &_type_menuPopup {
+        font-size: 25px;
+        line-height: 19px;
       }
     }
 
@@ -38,15 +43,12 @@
 
     ul {
       flex-direction: column;
+      font-size: 25px;
+      line-height: 19px;
     }
 
     li + li {
       margin-top: 50px;
-    }
-
-    li {
-      font-size: 25px;
-      line-height: 19px;
     }
   }
 
@@ -55,14 +57,12 @@
 
     ul {
       flex-direction: column;
+      font-size: 25px;
+      line-height: 19px;
     }
 
     li + li {
       margin-top: 50px;
-    }
-
-    li {
-      font-size: 25px;
     }
   }
 

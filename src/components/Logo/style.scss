@@ -1,0 +1,17 @@
+@import '../../styles/mixins.scss';
+
+.logo {
+  position: absolute;
+  top: 65px;
+  left: 65px;
+
+  @include tablet {
+    top: 65px;
+    left: 65px;
+  }
+
+  @include mobile {
+    top: 40px;
+    left: 40px;
+  }
+}
