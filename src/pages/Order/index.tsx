@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Logo} from "../../components/Logo";
 
 type Props = {
     parentClass?: string;
@@ -15,6 +16,7 @@ const Order: React.FC<Props> = (props) => {
         <div
             className={blockClass}
         >
+            <Logo parentClass={blockClass}/>
             ORDER
         </div>
     )

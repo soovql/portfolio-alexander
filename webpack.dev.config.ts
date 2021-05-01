@@ -4,6 +4,9 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 
 
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 const config: webpack.Configuration = {
     mode: "development",
     output: {
@@ -35,14 +38,8 @@ const config: webpack.Configuration = {
                 loader: 'file-loader'
             },
             {
-                test: /\.svg/,
-                use: {
-                    loader: "svg-url-loader",
-                    options: {
-                        // make all svg images to work in IE
-                        iesafe: true,
-                    },
-                },
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
             }
         ],
     },

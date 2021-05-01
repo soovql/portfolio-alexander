@@ -37,15 +37,19 @@ const config: webpack.Configuration = {
                 test: /\.(png|jpg|jpeg|gif)$/,
                 loader: 'file-loader'
             },
+            // {
+            //     test: /\.svg/,
+            //     use: {
+            //         loader: "svg-url-loader",
+            //         options: {
+            //             iesafe: true,
+            //         },
+            //     },
+            // },
             {
-                test: /\.svg/,
-                use: {
-                    loader: "svg-url-loader",
-                    options: {
-                        iesafe: true,
-                    },
-                },
-            },
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            }
         ],
     },
     resolve: {
