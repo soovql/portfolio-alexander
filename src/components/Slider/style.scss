@@ -1,0 +1,145 @@
+@import '../../styles/mixins.scss';
+
+.slider {
+  height: 100%;
+  font-size: 0; // gap fix
+
+  .slick-slide:focus {
+    outline: none;
+  }
+
+  // dots
+  .slick-dots {
+    bottom: 55px;
+
+    li {
+      width: 22px;
+      height: 1px;
+      margin-right: 0;
+
+      + li {
+        margin-left: 8px;
+      }
+    }
+
+    .customDot {
+      display: inline-block;
+      vertical-align: middle;
+      width: 22px;
+      height: 1px;
+      padding: 0;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
+
+      // увеличивает область клика
+      &:before{
+        position:absolute;
+        content:'';
+        left: 0;
+        right: 0;
+        top: -7px;
+        bottom: -7px;
+      }
+
+      &:after {
+        position:absolute;
+        top:0;
+        left:0;
+        width:0;
+        height: 3px;
+        background: #fff;
+        display:block;
+        content:'';
+        z-index: 1;
+        border-radius: 3px;
+        transition-duration: 0ms;
+      }
+    }
+
+    .slick-active {
+
+      .customDot {
+        height: 3px;
+
+        &:after {
+          height: 3px;
+          width:100%;
+          transition: width 5000ms ease-in-out;
+          border-radius: 3px;
+        }
+      }
+    }
+    //a.customDot {
+    //  display: inline-block;
+    //  vertical-align: middle;
+    //  width: 22px;
+    //  height: 1px;
+    //  padding: 0;
+    //  border-radius: 3px;
+    //  background-color: rgba(255, 255, 255, 0.25);
+    //  background-image: linear-gradient(to right, white 50%, rgba(255, 255, 255, 0.25) 50%);
+    //  background-size: 200% 100%;
+    //  background-position: right bottom;
+    //}
+    //
+    //.slick-active {
+    //
+    //  a.customDot {
+    //    height: 3px;
+    //    background-image:
+    //            linear-gradient(to right, white 51%, transparent 50%);
+    //    background-position: left bottom;
+    //    transition: background-position 5000ms;
+    //  }
+    //}
+  }
+
+  .slick-current {
+
+    .slider-image {
+      transition-duration: 0s;
+      transition-property: transform;
+    }
+
+    &.zoomed {
+      .slider-image {
+        transform: scale(1.2);
+        transition-duration: 4s;
+      }
+    }
+
+  }
+
+
+  //arrow
+  .arrow {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    width: 30%;
+
+    &_direction_right {
+      right: 0;
+    }
+
+    &_direction_left {
+      left: 0;
+    }
+
+    &_state_open {
+      display: none;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  img {
+    height: 100vh;
+    object-fit: cover;
+    width: 100%;
+    min-height: 100%;
+  }
+}

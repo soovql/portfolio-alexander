@@ -1,36 +1,27 @@
-import * as React from "react";
-import {NavLink} from "react-router-dom";
-import {cn} from "@bem-react/classname";
-import logo from '../../styles/images/logo.svg'
-import LogoImage from '../../styles/images/logo.svg'
-
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import { cn } from '@bem-react/classname';
+import { ReactComponent as LogoImage } from '../../styles/images/logo.svg';
+import classNames from "classnames";
 
 type Props = {
-    parentClass?: string;
-    auxClass?: string;
+  parentClass?: string;
+  color?: string;
+  isHidden?: boolean;
 };
 
 const Logo: React.FC<Props> = (props) => {
-    const {
-        parentClass,
-        auxClass,
-    } = props;
+  const { parentClass, color, isHidden } = props;
 
-    const blockClass = 'logo';
-    const logoClass = cn(parentClass!)(blockClass, [blockClass]);
+  const rootClass = cn(parentClass as string);
+  const blockClass = 'logo';
+  const logoClass = classNames(rootClass(blockClass), cn(blockClass)({isHidden: isHidden}));
 
-    return (
-        <NavLink to="/" className={logoClass}>
-            {/*<img*/}
-            {/*    src={logo}*/}
-            {/*    alt="logo sasha stukhin"*/}
-            {/*/>*/}
-            <LogoImage
-                fill={"#000"}
-            />
-        </NavLink>
-
-    )
+  return (
+    <NavLink to="/" className={logoClass}>
+      <LogoImage fill={color || '#fff'} />
+    </NavLink>
+  );
 };
 
 export { Logo };

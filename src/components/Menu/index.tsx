@@ -1,52 +1,42 @@
-import * as React from "react";
-import {NavLink} from "react-router-dom";
-import {cn} from "@bem-react/classname";
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import { cn } from '@bem-react/classname';
+import classNames from 'classnames';
 
 type Props = {
-    parentClass?: string;
-    auxClass?: string;
+  parentClass?: string;
+  auxClass?: string;
+  type?: string;
 };
 
 const Menu: React.FC<Props> = (props) => {
-    const {
-        parentClass,
-        auxClass,
-    } = props;
+  const { parentClass, auxClass, type } = props;
 
-    const rootClass = cn(parentClass!);
-    const blockClass = 'menu';
-    const linkClass = cn('link');
+  const blockClass = 'menu';
+  const rootClass = cn(parentClass as string);
+  const linkClass = cn('link');
 
-    return (
-        <nav className={rootClass(blockClass, [blockClass])}>
-            <ul>
-                <li>
-                    <NavLink
-                        className={linkClass({ type: auxClass })}
-                        to="/nature"
-                    >
-                        пейзажи
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        className={linkClass({ type: auxClass })}
-                        to="/city"
-                    >
-                        город
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        className={linkClass({ type: auxClass })}
-                        to="/order"
-                    >
-                        ещё
-                    </NavLink>
-                </li>
-            </ul>
-        </nav>
-    )
+  return (
+    <nav className={classNames(rootClass(blockClass), cn(blockClass)({type: type}))}>
+      <ul>
+        <li>
+          <NavLink className={linkClass({ type: auxClass })} to="/nature">
+            пейзажи
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={linkClass({ type: auxClass })} to="/city">
+            город
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={linkClass({ type: auxClass })} to="/order">
+            ещё
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
 export { Menu };

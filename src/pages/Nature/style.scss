@@ -1,0 +1,19 @@
+@import '../../styles/mixins.scss';
+
+.nature {
+  position: relative;
+  height: 100%;
+  background-image: url("pages/Nature/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &-burger {
+    z-index: 2;
+
+    @include desktop {
+      position: absolute;
+      top: 81px;
+      right: 75px;
+    }
+  }
+}

@@ -1,18 +1,18 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/animation.scss';
 
 .burger {
   position: absolute;
   display: block;
   height: 50px;
   width: 50px;
-  background-color: #E5EDEF;
   border-radius: 50%;
   backdrop-filter: blur(4px);
   z-index: 2;
-  transition: background-color 500ms linear;
+  transition: background-color $animation_duration_in linear;
 
   &.open {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 
   @include tablet {

@@ -34,21 +34,12 @@ const config: webpack.Configuration = {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/,
+                test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
                 loader: 'file-loader'
             },
-            // {
-            //     test: /\.svg/,
-            //     use: {
-            //         loader: "svg-url-loader",
-            //         options: {
-            //             iesafe: true,
-            //         },
-            //     },
-            // },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                use: ['@svgr/webpack', 'url-loader'],
             }
         ],
     },

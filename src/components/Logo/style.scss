@@ -1,22 +1,38 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/animation.scss';
 
 a.logo {
-    width: 112px;
-    height: 90px;
-    position: absolute;
+  width: 112px;
+  height: 90px;
+  position: absolute;
+  top: 65px;
+  left: 65px;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility $animation_duration_in, opacity $animation_duration_in linear;
+
+//@todo svgr transition
+  svg {
+    transition-property: fill;
+    transition-duration: .5s;
+    transition-timing-function: linear;
+  }
+
+  @include tablet {
     top: 65px;
     left: 65px;
-    cursor: url('styles/images/cursor/cursor_link.svg'), pointer;
+  }
 
-    @include tablet {
-      top: 65px;
-      left: 65px;
-    }
+  @include mobile {
+    top: 40px;
+    left: 40px;
+  }
 
-    @include mobile {
-      top: 40px;
-      left: 40px;
-    }
+  &_isHidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility $animation_duration_in, opacity $animation_duration_in linear;
+  }
 
   img {
     position: relative;

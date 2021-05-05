@@ -3,10 +3,6 @@ import * as webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 
-
-// @ts-ignore
-// @ts-ignore
-// @ts-ignore
 const config: webpack.Configuration = {
     mode: "development",
     output: {
@@ -34,12 +30,12 @@ const config: webpack.Configuration = {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/,
+                test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
                 loader: 'file-loader'
             },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                use: ['@svgr/webpack', 'url-loader'],
             }
         ],
     },
@@ -56,6 +52,7 @@ const config: webpack.Configuration = {
         }),
     ],
     devtool: "inline-source-map",
+    // @ts-ignore
     devServer: {
         contentBase: path.join(__dirname, "build"),
         historyApiFallback: true,

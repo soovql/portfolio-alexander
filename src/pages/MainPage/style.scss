@@ -1,15 +1,11 @@
+@import '../../styles/mixins.scss';
 @import '../../components/Social/index.scss';
 @import '../../components/Menu/index.scss';
-@import '../../components/Burger/index.scss';
-@import '../../components/MenuPopup/index.scss';
-@import '../../components/Logo/style.scss';
+@import '../../components/Slider/style.scss';
 
 .mainPage {
   position: relative;
   height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 
   &-social {
     position: absolute;
@@ -17,7 +13,12 @@
     left: 65px;
   }
 
+  &-logo {
+    z-index: 2;
+  }
+
   &-menu, &-social {
+    z-index: 2;
     display: none;
 
     @include desktop {
@@ -33,6 +34,7 @@
   }
 
   &-burger {
+    z-index: 2;
 
     @include desktop {
       display: none;

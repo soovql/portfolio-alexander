@@ -4,15 +4,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(221.79deg, rgba(0, 0, 0, 0.9) 1.44%, rgba(0, 0, 0, 0.486) 85.3%);
   transition: opacity 500ms, visibility 500ms;
   opacity: 0;
   visibility: hidden;
+  @include absolute_position;
+
+  // пока убираю фон картинку
+  //&:before {
+  //  content: '';
+  //  @include absolute_position;
+  //  background-image: url('styles/images/bg.png');
+  //  background-repeat: no-repeat;
+  //  background-size: cover;
+  //  opacity: 20%;
+  //}
+
+  &:after {
+    content: '';
+    @include absolute_position;
+    background: linear-gradient(221.79deg, rgba(0, 0, 0, 0.9) 1.44%, rgba(0, 0, 0, 0.486) 85.3%);
+  }
+
+  &-contentWrapper {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   &-menu {
     display: flex;
@@ -24,8 +42,18 @@
   }
 
   &-bottomWrapper {
-    padding-top: 81px;
-    padding-bottom: 57px;
+    padding-top: 157px;
+    padding-bottom: 90px;
+
+    @include tablet {
+      padding-top: 157px;
+      padding-bottom: 90px;
+    }
+
+    @include mobile {
+      padding-top: 81px;
+      padding-bottom: 57px;
+    }
   }
 
   &-social {
@@ -44,7 +72,7 @@
     font-weight: 300;
     letter-spacing: -0.03em;
     color: #fff;
-    opacity: 0.15;
+    opacity: 0.25; // исходная 0.15
     text-align: center;
   }
 
