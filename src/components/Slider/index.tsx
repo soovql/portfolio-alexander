@@ -2,11 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import { cn } from '@bem-react/classname';
 import Slick, { Settings } from 'react-slick';
-// @todo import folder
-import image from '../../styles/images/gallery/1.jpg';
-import image2 from '../../styles/images/gallery/2.jpg';
-import image3 from '../../styles/images/gallery/3.jpg';
-import image4 from '../../styles/images/gallery/4.jpg';
 
 type ISliderProps = {
   parentClass?: string;
@@ -31,7 +26,7 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
 
   }, [isZoomed])
 
-  const images = [{ url: image }, { url: image2 }, { url: image3 }, { url: image4}];
+  const templates = require.context('../../styles/images/gallery/', true, /\.(jpg|jpeg)$/);
 
   const slickSettings: Settings = {
     lazyLoad: 'ondemand',
@@ -68,12 +63,11 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
   };
 
   const renderItems = () => {
-    return images.map((item, i) => (
-      <div key={i}>
-        {/*@todo alt*/}
-        <img src={images[i].url} alt={'test'} className="slider-image"/>
-      </div>
-    ));
+    return  templates.keys().map((elem, i) => (
+        <div key={i}>
+          <img className="slider-image" key={elem} src={templates(elem).default} alt="Саша Стюхин Пейзажист" />
+        </div>
+    ))
   };
 
   return (
