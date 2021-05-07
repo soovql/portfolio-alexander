@@ -6,6 +6,7 @@
 @import 'pages/MainPage/style.scss';
 @import 'pages/Order/style.scss';
 @import 'pages/Nature/style.scss';
+@import 'pages/City/style.scss';
 
 body, html {
   font-family: 'Rubik', sans-serif;
@@ -27,18 +28,19 @@ ul {
 
 a.link {
   position: relative;
+  user-select: none;
 
   &:before {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -7px; // вместо -11px из-за высоты a элемента
+    bottom: -12px; // вместо -11px из-за высоты a элемента
     width: 22px;
     height: 1px;
     border-radius: 3px;
     background-color: rgba(255, 255, 255, 0.25);
-    transition: width 0.5s ease-in-out, bottom .2s linear;
+    transition: width 0.2s ease-in-out, bottom .1s linear;
   }
 
   &:hover, &:active {

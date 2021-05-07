@@ -7,6 +7,27 @@
   position: relative;
   height: 100%;
 
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+
+    @include desktop {
+      height: 160px;
+    }
+
+    @include tablet {
+      height: 136px;
+    }
+
+    @include mobile {
+      height: 93px;
+    }
+  }
+
   &-social {
     position: absolute;
     bottom: 60px;

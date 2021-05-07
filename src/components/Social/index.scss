@@ -29,23 +29,36 @@
       margin-left: 27px;
     }
 
-    &:after {
+    &:before {
       content: '';
       position: absolute;
-      bottom: -5px;
       left: 50%;
       transform: translateX(-50%);
-      width: 22px;
-      height: 2px;
-      background-color: #fff;
-      opacity: 0.25;
-      transition: opacity 0.5s ease-in-out;
+      //@todo combine with link, tho different offset
+      bottom: -6px; // вместо -11px из-за высоты a элемента
+      width: 12px;
+      height: 1px;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
+      transition: width 0.2s ease-in-out, bottom .1s linear;
     }
 
     &:hover, &:active {
-      &:after {
-        background-color: #fff;
-        opacity: 1;
+      &:before {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 1);
+      }
+    }
+
+    &:hover {
+      &:before {
+        bottom: -5px;
+      }
+    }
+
+    &:active {
+      &:before {
+        bottom: -3px;
       }
     }
   }

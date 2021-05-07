@@ -1,8 +1,18 @@
 @import '../../styles/mixins.scss';
+@import './dots.scss';
 
 .slider {
   height: 100%;
   font-size: 0; // gap fix
+
+  &.blurred {
+    filter: blur(4px);
+  }
+
+  &-slider {
+    // ios fix
+    height: 100%;
+  }
 
   .slick-slide:focus {
     outline: none;
@@ -11,6 +21,7 @@
   // dots
   .slick-dots {
     bottom: 55px;
+    z-index: 1;
 
     li {
       width: 22px;
@@ -21,95 +32,7 @@
         margin-left: 8px;
       }
     }
-
-    .customDot {
-      display: inline-block;
-      vertical-align: middle;
-      width: 22px;
-      height: 1px;
-      padding: 0;
-      border-radius: 3px;
-      background-color: rgba(255, 255, 255, 0.25);
-
-      // увеличивает область клика
-      &:before{
-        position:absolute;
-        content:'';
-        left: 0;
-        right: 0;
-        top: -7px;
-        bottom: -7px;
-      }
-
-      &:after {
-        position:absolute;
-        top:0;
-        left:0;
-        width:0;
-        height: 3px;
-        background: #fff;
-        display:block;
-        content:'';
-        z-index: 1;
-        border-radius: 3px;
-        transition-duration: 0ms;
-      }
-    }
-
-    .slick-active {
-
-      .customDot {
-        height: 3px;
-
-        &:after {
-          height: 3px;
-          width:100%;
-          transition: width 5000ms ease-in-out;
-          border-radius: 3px;
-        }
-      }
-    }
-    //a.customDot {
-    //  display: inline-block;
-    //  vertical-align: middle;
-    //  width: 22px;
-    //  height: 1px;
-    //  padding: 0;
-    //  border-radius: 3px;
-    //  background-color: rgba(255, 255, 255, 0.25);
-    //  background-image: linear-gradient(to right, white 50%, rgba(255, 255, 255, 0.25) 50%);
-    //  background-size: 200% 100%;
-    //  background-position: right bottom;
-    //}
-    //
-    //.slick-active {
-    //
-    //  a.customDot {
-    //    height: 3px;
-    //    background-image:
-    //            linear-gradient(to right, white 51%, transparent 50%);
-    //    background-position: left bottom;
-    //    transition: background-position 5000ms;
-    //  }
-    //}
   }
-
-  .slick-current {
-
-    .slider-image {
-      transition-duration: 0s;
-      transition-property: transform;
-    }
-
-    &.zoomed {
-      .slider-image {
-        transform: scale(1.2);
-        transition-duration: 4s;
-      }
-    }
-
-  }
-
 
   //arrow
   .arrow {
@@ -137,9 +60,76 @@
   }
 
   img {
-    height: 100vh;
+    // safari ios fix
+    //min-height: -webkit-fill-available;
+    //height: 100%;
     object-fit: cover;
     width: 100%;
-    min-height: 100%;
+  }
+}
+
+@keyframes cf4FadeInOut {
+  0% {
+    opacity:1;
+  }
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:0;
+  }
+  92% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+//
+//.slider-image {
+//  -webkit-transition: opacity 1s ease-in-out;
+//  -moz-transition: opacity 1s ease-in-out;
+//  -o-transition: opacity 1s ease-in-out;
+//  transition: opacity 1s ease-in-out;
+//  opacity:0;
+//  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+//  filter: alpha(opacity=0);
+//}
+//.slick-active {
+//  .slider-image {
+//    opacity:1;
+//    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+//    filter: alpha(opacity=1);
+//  }
+//}
+
+
+@-webkit-keyframes image-zoom {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+    transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+    transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+  }
+}
+
+// slider animation
+.slick-active {
+
+  .slider-image {
+    transform: scale(1) translateY(0);
+  }
+
+  &.zoomed {
+    .slider-image {
+      transform: scale(1.0005) translateY(-15px);
+      animation: image-zoom 8s ease-out both;
+    }
   }
 }
