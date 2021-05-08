@@ -6,10 +6,10 @@ export enum MainPageLogoColors {
 }
 
 export enum MainPageBurgerColors {
-  '#95AEB5',
-  '#75697D',
-  '#C6CCE2',
-  '#DDE8F3',
+  'rgba(149, 174, 181, 0.25)',
+  'rgba(117, 105, 125, 0.25)',
+  'rgba(198, 204, 226, 0.25)',
+  'rgba(221, 232, 243, 0.25)',
 }
 
 export enum MainPageBurgerLineColors {

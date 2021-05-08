@@ -7,13 +7,14 @@ type Props = {
   open: boolean;
   setOpen: (v: boolean) => void;
   color?: string;
+  barColor?: string;
 };
 
 const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(
   props,
   ref
 ) {
-  const { parentClass, open, setOpen, color, ...rest } = props;
+  const { parentClass, open, setOpen, color, barColor, ...rest } = props;
 
   const rootClass = cn(parentClass as string);
   const blockClass = cn('burger');
@@ -33,8 +34,14 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(
       onClick={() => setOpen(!open)}
     >
       <div className={blockClass('barContainer')}>
-        <div className={blockClass('bar')}/>
-        <div className={blockClass('bar')}/>
+        <div
+            className={blockClass('bar')}
+            style={{ backgroundColor: barColor || '#FFFFF' }}
+        />
+        <div
+            className={blockClass('bar')}
+            style={{ backgroundColor: barColor || '#FFFFF' }}
+        />
       </div>
     </div>
   );
