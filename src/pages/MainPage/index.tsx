@@ -7,6 +7,7 @@ import { MenuPopup } from '../../components/MenuPopup';
 import { Logo } from '../../components/Logo';
 import { MainPageLogoColors, MainPageBurgerColors } from '../../logoColors';
 import { Slider } from '../../components/Slider';
+import {Cursor} from "../../components/Cursor";
 
 const MainPage: React.FC = (props) => {
   const blockClass = 'mainPage';
@@ -15,8 +16,11 @@ const MainPage: React.FC = (props) => {
 
   return (
     <div className={blockClass}>
+        <Cursor />
         <Logo
             parentClass={blockClass}
+            //disabling logo click on main page
+            noClick={true}
             color={MainPageLogoColors[color] || '#fff'}
             isHidden={open}
         />

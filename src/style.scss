@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
-@import 'styles/common.scss';
 @import 'components/Burger/index.scss';
 @import 'components/MenuPopup/index.scss';
 @import 'components/Logo/style.scss';
@@ -7,6 +6,10 @@
 @import 'pages/Order/style.scss';
 @import 'pages/Nature/style.scss';
 @import 'pages/City/style.scss';
+
+body:not(.mobile) {
+  cursor: none;
+}
 
 body, html {
   font-family: 'Rubik', sans-serif;

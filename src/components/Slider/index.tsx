@@ -65,10 +65,12 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     customPaging: function customPage2(i) {
       return (
           <a
-              className={"customDot"}
+              className={"customDotWrapper"}
           >
-            <div className={"customDotValue"}/>
-              {i + 1}
+            <div  className={"customDot"}>
+              <div className={"customDotValue"}/>
+                {i + 1}
+            </div>
           </a>
       )
     }

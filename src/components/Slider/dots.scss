@@ -1,3 +1,15 @@
+.customDotWrapper {
+  // увеличивает область клика
+  &:before {
+    position:absolute;
+    content:'';
+    left: 0;
+    right: 0;
+    top: -7px;
+    bottom: -7px;
+  }
+}
+
 .customDot {
   position: relative;
   display: inline-block;
@@ -8,16 +20,6 @@
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.25);
   overflow: hidden;
-
-  // увеличивает область клика
-  &:before {
-    position:absolute;
-    content:'';
-    left: 0;
-    right: 0;
-    top: -7px;
-    bottom: -7px;
-  }
 
   .customDotValue {
     position: absolute;

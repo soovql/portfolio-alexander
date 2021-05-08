@@ -5,17 +5,18 @@ import { ReactComponent as LogoImage } from '../../styles/images/logo.svg';
 import classNames from "classnames";
 
 type Props = {
-  parentClass?: string;
+  parentClass: string;
+  noClick?: boolean;
   color?: string;
   isHidden?: boolean;
 };
 
 const Logo: React.FC<Props> = (props) => {
-  const { parentClass, color, isHidden } = props;
+  const { parentClass, noClick, color, isHidden } = props;
 
   const rootClass = cn(parentClass as string);
   const blockClass = 'logo';
-  const logoClass = classNames(rootClass(blockClass), cn(blockClass)({isHidden: isHidden}));
+  const logoClass = classNames(rootClass(blockClass), cn(blockClass)({isHidden}), noClick && 'noclick');
 
   return (
     <NavLink to="/" className={logoClass}>
