@@ -1,0 +1,41 @@
+.nature {
+  .slider {
+    overflow: hidden;
+
+    .slick-slider {
+      padding-top: 200px;
+    }
+  }
+
+  .slick-center {
+    width: 510px;
+    min-height: 563px;
+  }
+
+  .slick-track {
+    display: flex;
+  }
+
+  .center {
+    .slick-center {
+      .picture {
+        transform: scale(1.25);
+      }
+    }
+  }
+
+
+  .slick-slide img {
+    height:200px;
+  }
+
+
+  .slick-slide {
+    margin: 0 111px;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -27px;
+    height:200px;
+  }
+}

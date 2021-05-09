@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import classNames from 'classnames';
 import { Social } from '../Social';
@@ -15,6 +16,21 @@ const MenuPopup = React.forwardRef<HTMLDivElement, IMenuPopupProps>(
 
     const blockClass = cn('menuPopup');
     const rootClass = cn(parentClass as string);
+
+    // for animation on load
+    useEffect(() => {
+        const modal = document.getElementsByClassName('menuPopup')[0] as HTMLElement;
+        modal.classList.add('animating');
+        if (open) {
+            setTimeout(() => {
+                modal.classList.remove('animating');
+                modal.classList.add('animated')
+                return () =>  modal.classList.remove('animated');
+            }, 1000)
+        }
+        return
+    }, [open])
+
 
     return (
       <div

@@ -67,7 +67,7 @@ const Cursor: React.FC<Props> = (props) => {
         };
 
         const hoverPictureEvents = () => {
-            document.querySelectorAll('.picture').forEach((el) => {
+            document.querySelectorAll('.slick-current .picture').forEach((el) => {
                 el.addEventListener('mouseover', () => setPictureHover(true));
                 el.addEventListener('mouseout', () => setPictureHover(false));
             });

@@ -38,7 +38,7 @@ const Order: React.FC<Props> = (props) => {
             <div className={rootClass('wrapper')}>
                 <OrderMenu parentClass={blockClass} />
                 <div className={rootClass('content')}>
-                    <section className={rootClass('wrapper')}>
+                    <section className={rootClass('wrapper')} id="prints">
                         <img className={rootClass('image')} alt="Заказать фотоработу принтом"/>
                         <div className={rootClass('text')}>
                             Любую из&nbsp;представленных фоторабот можно заказать как отдельным <span>принтом</span>,
@@ -50,7 +50,7 @@ const Order: React.FC<Props> = (props) => {
                         </div>
                         <OrderLink text="Давай определимся" url={'#'} auxClass='small'/>
                     </section>
-                    <section className={rootClass('wrapper')}>
+                    <section className={rootClass('wrapper')} id="shoots">
                         <img className={rootClass('image')} alt="Коммерческие заказы на съемку"/>
                         <div className={rootClass('text')}>
                             Я&nbsp;открыт к&nbsp;коммерческим заказам на&nbsp;<span>съемку</span>: недвижимости
@@ -58,7 +58,7 @@ const Order: React.FC<Props> = (props) => {
                         </div>
                         <OrderLink text="Расскажи подробнее" url={'#'} auxClass='small'/>
                     </section>
-                    <section className={rootClass('wrapper')}>
+                    <section className={rootClass('wrapper')} id="tours">
                         <img className={rootClass('image')} alt="Туры с пейзажистами"/>
                         <div className={rootClass('text')}>
                             Сейчас я&nbsp;сам езжу с&nbsp;лучшими пейзажистами в&nbsp;<span>туры</span>, чтобы набраться опыта и&nbsp;скоро буду
@@ -67,7 +67,7 @@ const Order: React.FC<Props> = (props) => {
                         </div>
                         <OrderLink text="Давай прогуляемся" url={'#'} auxClass='small'/>
                     </section>
-                    <section className={rootClass('wrapper')}>
+                    <section className={rootClass('wrapper')} id="more">
                         <img className={rootClass('image')} alt="Заказать классный лендинг"/>
                         <div className={rootClass('text')}>
                             Вам понравился этот <span>сайт</span>? Если, да, то, если хотите себе классный лендинг, то&nbsp;скорее всего я&nbsp;смогу вам помочь.

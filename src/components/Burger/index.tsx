@@ -8,6 +8,7 @@ type Props = {
   setOpen: (v: boolean) => void;
   color?: string;
   barColor?: string;
+  onClick?(event: React.MouseEvent): void;
 };
 
 const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(

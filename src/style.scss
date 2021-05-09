@@ -37,35 +37,52 @@ a.link {
   position: relative;
   user-select: none;
 
-  &:before {
-    content: '';
+  .underline {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -12px; // вместо -11px из-за высоты a элемента
     width: 22px;
     height: 1px;
-    border-radius: 3px;
-    background-color: rgba(255, 255, 255, 0.25);
-    transition: width 0.2s ease-in-out, bottom .1s linear;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 1px;
+      bottom: -12px; // вместо -11px из-за высоты a элемента
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
+      transition: width 0.2s ease-in-out, bottom .1s linear;
+    }
   }
 
   &:hover, &:active {
-    &:before {
+    .underline {
       width: 100%;
-      background-color: rgba(255, 255, 255, 1);
+
+      &:before {
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 1);
+      }
     }
   }
 
   &:hover {
-    &:before {
-      bottom: -5px;
+    .underline {
+      &:before {
+        bottom: -7px;
+      }
     }
   }
 
   &:active {
-    &:before {
-      bottom: -3px;
+    .underline {
+      &:before {
+        bottom: -5px;
+      }
     }
   }
 

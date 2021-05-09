@@ -1,100 +1,102 @@
 @import '../../styles/mixins.scss';
 @import './dots.scss';
 
-.slider {
-  height: 100%;
-  font-size: 0; // gap fix
-
-  &.blurred {
-    filter: blur(4px);
-  }
-
-  &-slider {
-    // ios fix
+.mainPage {
+  .slider {
     height: 100%;
-  }
+    font-size: 0; // gap fix
 
-  .slick-slide:focus {
-    outline: none;
-  }
+    &.blurred {
+      filter: blur(4px);
+    }
 
-  // dots
-  .slick-dots {
-    bottom: 55px;
-    z-index: 2;
+    &-slider {
+      // ios fix
+      height: 100%;
+    }
 
-    li {
-      width: 22px;
-      height: 1px;
-      margin-right: 0;
+    .slick-slide:focus {
+      outline: none;
+    }
 
-      + li {
-        margin-left: 8px;
+    // dots
+    .slick-dots {
+      bottom: 55px;
+      z-index: 2;
+
+      li {
+        width: 22px;
+        height: 1px;
+        margin-right: 0;
+
+        + li {
+          margin-left: 8px;
+        }
       }
     }
-  }
 
-  //arrow
-  .arrow {
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    height: 100%;
-    width: 30%;
+    //arrow
+    .arrow {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      height: 100%;
+      width: 30%;
 
-    &_direction_right {
-      right: 0;
+      &_direction_right {
+        right: 0;
+      }
+
+      &_direction_left {
+        left: 0;
+      }
+
+      &_state_open {
+        display: none;
+      }
+
+      @include mobile {
+        display: none;
+      }
     }
 
-    &_direction_left {
-      left: 0;
-    }
-
-    &_state_open {
-      display: none;
-    }
-
-    @include mobile {
-      display: none;
+    img {
+      object-fit: cover;
+      width: 100%;
     }
   }
 
-  img {
-    object-fit: cover;
-    width: 100%;
-  }
-}
-
-@keyframes cf4FadeInOut {
-  0% {
-    opacity:1;
-  }
-  17% {
-    opacity:1;
-  }
-  25% {
-    opacity:0;
-  }
-  92% {
-    opacity:0;
-  }
-  100% {
-    opacity:1;
-  }
-}
-
-
-// slider animation
-.slick-active {
-
-  .slider-image {
-    transform: scale(1);
+  @keyframes cf4FadeInOut {
+    0% {
+      opacity: 1;
+    }
+    17% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0;
+    }
+    92% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
-  &.zoomed {
+
+  // slider animation
+  .slick-active {
+
     .slider-image {
-      transform: scale(1.08);
-      transition: 8s ease-out;
+      transform: scale(1);
+    }
+
+    &.zoomed {
+      .slider-image {
+        transform: scale(1.08);
+        transition: 8s ease-out;
+      }
     }
   }
 }

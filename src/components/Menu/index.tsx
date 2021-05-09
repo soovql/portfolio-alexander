@@ -22,16 +22,19 @@ const Menu: React.FC<Props> = (props) => {
         <li>
           <NavLink className={linkClass({ type: auxClass })} to="/nature">
             пейзажи
+            <div className="underline"/>
           </NavLink>
         </li>
         <li>
           <NavLink className={linkClass({ type: auxClass })} to="/city">
             город
+            <div className="underline"/>
           </NavLink>
         </li>
         <li>
           <NavLink className={linkClass({ type: auxClass })} to="/order">
             ещё
+            <div className="underline"/>
           </NavLink>
         </li>
       </ul>

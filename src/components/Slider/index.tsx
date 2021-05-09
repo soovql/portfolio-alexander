@@ -36,7 +36,6 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     templates = require.context('../../styles/images/gallery/desktop/', true, /\.(jpg|jpeg)$/);
   }
 
-
   const slickSettings: Settings = {
     lazyLoad: 'ondemand',
     accessibility: true,
@@ -50,7 +49,7 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     cssEase: 'linear',
     fade: true,
     autoplay: !open,
-    swipeToSlide: true,
+    swipe: true,
     beforeChange: (index: number, next: number) => {
       changeColor(next);
       setZoomed(!isZoomed);
@@ -62,7 +61,7 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
         <ul style={{ margin: "0px", opacity: open ? '0' : '1' }}> {dots} </ul>
       );
     },
-    customPaging: function customPage2(i) {
+    customPaging: function addcustomPaging(i) {
       return (
           <a
               className={"customDotWrapper"}
