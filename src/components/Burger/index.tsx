@@ -36,11 +36,11 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(
       <div className={blockClass('barContainer')}>
         <div
             className={blockClass('bar')}
-            style={{ backgroundColor: barColor || '#FFFFF' }}
+            style={{ backgroundColor: barColor || '#FFFFFF' }}
         />
         <div
             className={blockClass('bar')}
-            style={{ backgroundColor: barColor || '#FFFFF' }}
+            style={{ backgroundColor: barColor || '#FFFFFF' }}
         />
       </div>
     </div>

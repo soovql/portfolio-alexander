@@ -10,8 +10,8 @@ a.logo {
   opacity: 1;
   visibility: visible;
   transition: visibility $animation_duration_in, opacity $animation_duration_in linear;
-
-//@todo svgr transition
+  z-index: 2;
+  
   svg {
     transition-property: fill;
     transition-duration: .3s;

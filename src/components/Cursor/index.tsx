@@ -10,6 +10,7 @@ const Cursor: React.FC<Props> = (props) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [hidden, setHidden] = useState(false);
     const [linkHover, setLinkHover] = useState(false);
+    const [pictureHover, setPictureHover] = useState(false);
     const [arrowHoverLeft, setArrowHoverLeft] = useState(false);
     const [arrowHoverRight, setArrowHoverRight] = useState(false);
 
@@ -65,10 +66,18 @@ const Cursor: React.FC<Props> = (props) => {
             });
         };
 
+        const hoverPictureEvents = () => {
+            document.querySelectorAll('.picture').forEach((el) => {
+                el.addEventListener('mouseover', () => setPictureHover(true));
+                el.addEventListener('mouseout', () => setPictureHover(false));
+            });
+        };
+
         addEventListeners();
         addLinkEvents();
         arrowLeftEvents();
         arrowRightEvents();
+        hoverPictureEvents();
         return () => removeEventListeners();
     }, []);
 
@@ -81,6 +90,7 @@ const Cursor: React.FC<Props> = (props) => {
                 blockClass,
                 hidden && 'hidden',
                 linkHover && 'hover',
+                pictureHover && 'picture',
                 arrowHoverLeft && 'arrow-left',
                 arrowHoverRight && 'arrow-right'
             )}

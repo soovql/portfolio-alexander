@@ -1,0 +1,47 @@
+.orderLink {
+  color: #0066FF;
+  letter-spacing: -0.02em;
+  font-size: 20px;
+  line-height: 17px;
+  font-weight: 300;
+
+  &_type_small {
+    font-size: 18px;
+  }
+
+  a {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -10px;
+      width: 22px;
+      height: 1px;
+      border-radius: 3px;
+      background-color: #0066FF;
+      transition: width 0.2s ease-in-out, bottom .1s linear;
+    }
+
+    &:hover, &:active {
+      &:before {
+        width: 100%;
+        background-color: #0066FF;
+      }
+    }
+
+    &:hover {
+      &:before {
+        bottom: -5px;
+      }
+    }
+
+    &:active {
+      &:before {
+        bottom: -3px;
+      }
+    }
+  }
+}

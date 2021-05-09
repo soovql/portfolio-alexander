@@ -41,7 +41,7 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     lazyLoad: 'ondemand',
     accessibility: true,
     draggable: false,
-    dots: !open,
+    dots: true,
     infinite: true,
     speed: 300,
     slidesToShow: 1,
@@ -59,7 +59,7 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     prevArrow: <Arrow direction={'left'} auxClass={open ? 'open' : 'closed'}/>,
     appendDots: function customDots(dots) {
       return (
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+        <ul style={{ margin: "0px", opacity: open ? '0' : '1' }}> {dots} </ul>
       );
     },
     customPaging: function customPage2(i) {

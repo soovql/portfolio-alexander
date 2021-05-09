@@ -24,8 +24,12 @@ const Nature: React.FC = (props) => {
             parentClass={blockClass}
             open={open}
             setOpen={setOpen}
+            color="#3C3C3C"
         />
         <MenuPopup parentClass={blockClass} open={open} />
+        <div className="picture"
+             style={{height: "500px", width: "500px", backgroundColor: "black", position: "absolute", top: "300px", left: "300px"}}
+        />
     </div>
   );
 };

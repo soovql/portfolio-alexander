@@ -1,8 +1,12 @@
+@import '../../components/OrderMenu/style.scss';
+@import '../../components/OrderLink/style.scss';
+
 .order {
   background-color: #fff;
   position: relative;
   height: 100%;
   color: #000;
+  overflow: auto;
 
   &-burger {
     z-index: 2;
@@ -12,5 +16,65 @@
       top: 81px;
       right: 75px;
     }
+  }
+
+  &-menuPopup {
+    background-color: #000;
+  }
+
+  &-wrapper {
+    position: relative;
+    height: 100%;
+
+    @include desktop {
+      padding-bottom: 305px;
+    }
+  }
+
+  &-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include desktop {
+      top: 825px;
+    }
+
+    @include tablet {
+      top: 825px;
+    }
+
+    @include mobile {
+      top: 749px;
+    }
+  }
+
+  &-text {
+    max-width: 310px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+
+    & + & {
+      margin-top: 10px;
+    }
+
+    span {
+      font-weight: 400;
+    }
+
+    @include tablet {
+      max-width: 300px;
+    }
+
+    @include mobile {
+      max-width: 300px;
+    }
+  }
+
+  .orderLink {
+    display: block;
+    margin-top: 13px;
   }
 }

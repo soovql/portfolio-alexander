@@ -1,0 +1,48 @@
+@import '../../styles/mixins.scss';
+
+.orderMenu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include desktop {
+        top: 681px;
+    }
+
+    @include tablet {
+        top: 603px;
+    }
+
+    @include mobile {
+        top: 409px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+
+        @include desktop {
+            li + li {
+                margin-left: 45px;
+            }
+        }
+
+        @include tablet {
+            flex-direction: column;
+            text-align: center;
+
+            li + li {
+                margin-top: 28px;
+            }
+        }
+
+        @include mobile {
+            flex-direction: column;
+            text-align: center;
+
+            li + li {
+                margin-top: 28px;
+            }
+        }
+    }
+}
