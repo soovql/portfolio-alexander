@@ -20,6 +20,8 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(
   const rootClass = cn(parentClass as string);
   const blockClass = cn('burger');
 
+  const burgerBarColor = open ?  '#FFFFFF' : (barColor || '#FFFFFF');
+
   return (
     <div
       {...rest}
@@ -37,11 +39,11 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(
       <div className={blockClass('barContainer')}>
         <div
             className={blockClass('bar')}
-            style={{ backgroundColor: barColor || '#FFFFFF' }}
+            style={{ backgroundColor: burgerBarColor }}
         />
         <div
             className={blockClass('bar')}
-            style={{ backgroundColor: barColor || '#FFFFFF' }}
+            style={{ backgroundColor: burgerBarColor }}
         />
       </div>
     </div>

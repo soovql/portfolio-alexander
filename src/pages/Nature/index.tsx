@@ -9,18 +9,19 @@ import {GallerySlider} from "../../components/GallerySlider";
 
 const Nature: React.FC = (props) => {
   const [open, setOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState(0);
 
   const blockClass = 'nature';
 
+  const templates = require.context('../../styles/images/nature/', true, /\.(jpg|jpeg)$/) as any;
+
   return (
     <div className={blockClass}>
-        <Cursor />
-        {!open && (
-            <Logo
-                parentClass={blockClass}
-                isHidden={open}
-            />
-        )}
+        <Cursor activeItem={activeItem}/>
+        <Logo
+            parentClass={blockClass}
+            isHidden={open}
+        />
         <Burger
             parentClass={blockClass}
             open={open}
@@ -28,7 +29,7 @@ const Nature: React.FC = (props) => {
             color="#3C3C3C"
         />
         <MenuPopup parentClass={blockClass} open={open} />
-        <GallerySlider/>
+        <GallerySlider templates={templates} open={open} setActive={setActiveItem}/>
     </div>
   );
 };

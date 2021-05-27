@@ -5,7 +5,6 @@ import Slick, { Settings } from 'react-slick';
 import classNames from "classnames";
 
 type ISliderProps = {
-  parentClass?: string;
   zoomed?: boolean;
   changeColor: (v: number) => void;
   open: boolean;
@@ -16,6 +15,9 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
   ref
 ) {
   const { changeColor, open, zoomed, ...rest } = props;
+
+  const blockClass = cn('slider');
+
   const [isZoomed, setZoomed] = useState(zoomed);
 
 
@@ -64,15 +66,24 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(
     customPaging: function addcustomPaging(i) {
       return (
           <a
-              className={"customDotWrapper"}
+              className={blockClass("customDotWrapper")}
           >
-            <div  className={"customDot"}>
-              <div className={"customDotValue"}/>
+            <div  className={blockClass("customDot")}>
+              <div className={blockClass("customDotValue")}/>
                 {i + 1}
             </div>
           </a>
       )
-    }
+    },
+    // stops autoplay on mobile swipe
+    responsive: [
+      {
+        breakpoint: 599,
+        settings: {
+          pauseOnFocus: true,
+        }
+      }
+    ]
   };
 
   const renderItems = () => {

@@ -4,9 +4,12 @@ import classNames from 'classnames';
 
 type Props = {
     parentClass?: string;
+    activeItem?: number;
 };
 
 const Cursor: React.FC<Props> = (props) => {
+    const { activeItem } = props;
+
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [hidden, setHidden] = useState(false);
     const [linkHover, setLinkHover] = useState(false);
@@ -14,32 +17,32 @@ const Cursor: React.FC<Props> = (props) => {
     const [arrowHoverLeft, setArrowHoverLeft] = useState(false);
     const [arrowHoverRight, setArrowHoverRight] = useState(false);
 
+    const addEventListeners = () => {
+        document.addEventListener('mousemove', mMove);
+        document.addEventListener('mouseenter', mEnter);
+        document.addEventListener('mouseleave', mLeave);
+    };
+
+    const removeEventListeners = () => {
+        document.removeEventListener('mousemove', mMove);
+        document.removeEventListener('mouseenter', mEnter);
+        document.removeEventListener('mouseleave', mLeave);
+    };
+
+    const mMove = (el: any) => {
+        setPosition({ x: el.clientX, y: el.clientY });
+    };
+
+    const mLeave = () => {
+        setHidden(true);
+    };
+
+    const mEnter = () => {
+        setHidden(false);
+    };
+
 
     useEffect(() => {
-        const addEventListeners = () => {
-            document.addEventListener('mousemove', mMove);
-            document.addEventListener('mouseenter', mEnter);
-            document.addEventListener('mouseleave', mLeave);
-        };
-
-        const removeEventListeners = () => {
-            document.removeEventListener('mousemove', mMove);
-            document.removeEventListener('mouseenter', mEnter);
-            document.removeEventListener('mouseleave', mLeave);
-        };
-
-        const mMove = (el: any) => {
-            setPosition({ x: el.clientX, y: el.clientY });
-        };
-
-        const mLeave = () => {
-            setHidden(true);
-        };
-
-        const mEnter = () => {
-            setHidden(false);
-        };
-
 
         const addLinkEvents = () => {
             document.querySelectorAll('a:not(.noclick)').forEach((el) => {
@@ -60,7 +63,7 @@ const Cursor: React.FC<Props> = (props) => {
         };
 
         const arrowRightEvents = () => {
-            document.querySelectorAll('.arrow_direction_right').forEach((el) => {
+            document.querySelectorAll('.arrow_direction_right',).forEach((el) => {
                 el.addEventListener('mouseover', () => setArrowHoverRight(true));
                 el.addEventListener('mouseout', () => setArrowHoverRight(false));
             });
@@ -68,6 +71,7 @@ const Cursor: React.FC<Props> = (props) => {
 
         const hoverPictureEvents = () => {
             document.querySelectorAll('.slick-current .picture').forEach((el) => {
+                console.log(activeItem, 'cursor');
                 el.addEventListener('mouseover', () => setPictureHover(true));
                 el.addEventListener('mouseout', () => setPictureHover(false));
             });
@@ -79,8 +83,7 @@ const Cursor: React.FC<Props> = (props) => {
         arrowRightEvents();
         hoverPictureEvents();
         return () => removeEventListeners();
-    }, []);
-
+    }, [activeItem]);
 
     const blockClass = 'cursor';
 

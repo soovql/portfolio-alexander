@@ -7,7 +7,7 @@ import { MenuPopup } from '../../components/MenuPopup';
 import { Logo } from '../../components/Logo';
 import { MainPageLogoColors, MainPageBurgerColors, MainPageBurgerLineColors } from '../../logoColors';
 import { Slider } from '../../components/Slider';
-import {Cursor} from "../../components/Cursor";
+import { Cursor } from "../../components/Cursor";
 
 const MainPage: React.FC = (props) => {
   const blockClass = 'mainPage';

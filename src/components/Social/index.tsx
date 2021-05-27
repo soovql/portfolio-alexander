@@ -22,8 +22,18 @@ const Social: React.FC<SocialProps> = (props) => {
   return (
     <div className={rootClass(blockClass, [cn('social')()])}>
       <ul className={cn('social')('list')}>
-        <SocialLink parentClass={blockClass} url="#" alt="ggg" type="tg" />
-        <SocialLink parentClass={blockClass} url="#" alt="ggg" type="bm" />
+        <SocialLink
+            parentClass={blockClass}
+            url="#"
+            alt="ggg"
+            type="tg"
+        />
+        <SocialLink
+            parentClass={blockClass}
+            url="#"
+            alt="ggg"
+            type="bm"
+        />
         <SocialLink
           parentClass={blockClass}
           url="https://instagram.com/stukhin"
@@ -41,8 +51,11 @@ const SocialLink: React.FC<LinkProps> = (props) => {
   const itemClass = cn(parentClass);
 
   return (
-    <li className={classNames(itemClass('item', { type }), 'link')}>
-      <a href={url}>{alt}</a>
+    <li className={classNames(itemClass('item', { type }))}>
+      <a href={url} className="link">
+        {alt}
+        <div className="underline"/>
+      </a>
     </li>
   );
 };

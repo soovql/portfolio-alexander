@@ -11,7 +11,7 @@ a.logo {
   visibility: visible;
   transition: visibility $animation_duration_in, opacity $animation_duration_in linear;
   z-index: 2;
-  
+
   svg {
     transition-property: fill;
     transition-duration: .3s;
@@ -26,6 +26,8 @@ a.logo {
   @include mobile {
     top: 40px;
     left: 40px;
+    width: 84px;
+    height: 66px;
   }
 
   &_isHidden {

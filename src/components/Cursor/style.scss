@@ -22,6 +22,14 @@ body:not(.mobile) {
       width: 6px;
       height: 6px;
     }
+    &.picture {
+      border: none;
+      height: 28px;
+      width: 28px;
+      background-image: url("./images/picture.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
 
     &.arrow-left {
       width: 7px;
@@ -45,13 +53,9 @@ body:not(.mobile) {
       transform: rotate(-135deg);
     }
 
-    &.picture {
-      border: none;
-      height: 28px;
-      width: 28px;
-      background-image: url("./images/picture.svg");
-      background-repeat: no-repeat;
-      background-size: contain;
+    &.slide {
+      height: 8px;
+      width: 8px;
     }
   }
 }

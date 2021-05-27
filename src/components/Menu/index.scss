@@ -18,6 +18,16 @@
       &:hover {
         color: #fff;
       }
+
+      @include link;
+
+      .underline {
+        width: 22px;
+
+        &:before {
+          width: 22px;
+        }
+      }
     }
 
   &:not(.menu_type_column) {
@@ -28,7 +38,7 @@
 
     @include desktop {
       position: absolute;
-      bottom: 67px;
+      bottom: 65px;
       right: 67px;
       text-align: right;
 

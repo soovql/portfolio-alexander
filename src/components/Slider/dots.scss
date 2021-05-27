@@ -1,48 +1,51 @@
-.customDotWrapper {
-  // увеличивает область клика
-  &:before {
-    position:absolute;
-    content:'';
-    left: 0;
-    right: 0;
-    top: -7px;
-    bottom: -7px;
+.slider {
+  &-customDotWrapper {
+    // увеличивает область клика
+    &:before {
+      position:absolute;
+      content:'';
+      left: 0;
+      right: 0;
+      top: -7px;
+      bottom: -7px;
+    }
   }
-}
 
-.customDot {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 22px;
-  height: 1px;
-  padding: 0;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
-
-  .customDotValue {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 3px;
+  &-customDot {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 1px;
+    padding: 0;
     border-radius: 3px;
-    background-color: #fff;
-    transform: translateX(-100%);
-    will-change: transform;
-  }
-}
+    background-color: rgba(255, 255, 255, 0.25);
+    overflow: hidden;
 
-.current {
-
-  .customDot {
-    height: 3px;
+    .slider-customDotValue {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 3px;
+      background-color: #fff;
+      transform: translateX(-100%);
+      will-change: transform;
+    }
   }
 
-  .customDotValue {
-    transform: translateX(0);
-    transition: transform 7s linear;
+  .current {
+
+    .slider-customDot {
+      height: 3px;
+    }
+
+    .slider-customDotValue {
+      transform: translateX(0);
+      transition: transform 7s linear;
+    }
   }
+
 }

@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .social {
   &-list {
     display: flex;
@@ -13,6 +15,19 @@
     background-repeat: no-repeat;
     background-size: contain;
 
+    a {
+      @include link;
+      width: 100%;
+
+      .underline {
+        width: 12px;
+
+        &:before {
+          width: 12px;
+        }
+      }
+    }
+
     &_type_tg {
       background-image: url("components/Social/images/tg.png");
     }
@@ -27,39 +42,6 @@
 
     + .social-item {
       margin-left: 27px;
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      //@todo combine with link, tho different offset
-      bottom: -6px; // вместо -11px из-за высоты a элемента
-      width: 12px;
-      height: 1px;
-      border-radius: 3px;
-      background-color: rgba(255, 255, 255, 0.25);
-      transition: width 0.2s ease-in-out, bottom .1s linear;
-    }
-
-    &:hover, &:active {
-      &:before {
-        width: 100%;
-        background-color: rgba(255, 255, 255, 1);
-      }
-    }
-
-    &:hover {
-      &:before {
-        bottom: -5px;
-      }
-    }
-
-    &:active {
-      &:before {
-        bottom: -3px;
-      }
     }
   }
 }

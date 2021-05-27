@@ -10,6 +10,13 @@ $desktop-width: 1024px;
   bottom: 0;
 }
 
+@mixin responsive_vertical_center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
 @mixin mobile {
   @media (max-width: #{$tablet-width - 1px}) {
     @content;
@@ -22,8 +29,69 @@ $desktop-width: 1024px;
   }
 }
 
+@mixin mobile_and_tablet {
+  @media (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
 @mixin desktop {
   @media (min-width: #{$desktop-width}) {
     @content;
+  }
+}
+
+@mixin link {
+  position: relative;
+  user-select: none;
+  height: 100%;
+  display: inline-block;
+
+  .underline {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    bottom: 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 1px;
+      bottom: -12px; // вместо -11px из-за высоты a элемента
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
+      transition: width 0.2s ease-in-out, bottom .1s linear;
+    }
+  }
+
+  &:hover, &:active {
+    .underline {
+      width: 100%;
+
+      &:before {
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+
+  &:hover {
+    .underline {
+      &:before {
+        bottom: -7px;
+      }
+    }
+  }
+
+  &:active {
+    .underline {
+      &:before {
+        bottom: -5px;
+      }
+    }
   }
 }
