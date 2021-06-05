@@ -23,7 +23,7 @@ const Logo: React.FC<Props> = (props) => {
 
   return (
     <NavLink to="/" className={logoClass} title="Вернуться на главную страницу">
-      { (window.innerWidth < 599) ? logoMobile : logo }
+      { (window.innerWidth < 392) ? logoMobile : logo }
     </NavLink>
   );
 };

@@ -1,0 +1,69 @@
+@import '../../styles/mixins.scss';
+
+.ReactModalPortal {
+
+  .ReactModal__Overlay {
+    z-index: 3;
+  }
+
+  .Modal {
+    position: relative;
+    background-color: #000;
+    height: 100%;
+    padding: 40px 180px;
+    box-sizing: border-box;
+
+    @include mobile_and_tablet {
+      padding: 0;
+    }
+  }
+
+  .modal_picture {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+
+    @include mobile_and_tablet {
+      object-fit: cover;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      top: 98px;
+      right: 86px;
+    }
+  }
+
+  .modal_button {
+    height: 28px;
+    width: 28px;
+
+    svg:hover {
+      path {
+        stroke: cornflowerblue;
+      }
+    }
+  }
+
+  .resize_buttons {
+    display: flex;
+    flex-direction: column;
+
+    button + button {
+      margin-top: 24px;
+    }
+
+    @include desktop {
+      margin-top: 147px;
+    }
+  }
+}

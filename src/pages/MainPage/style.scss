@@ -36,6 +36,7 @@
 
   &-logo {
     z-index: 2;
+    pointer-events: none;
   }
 
   &-menu, &-social {

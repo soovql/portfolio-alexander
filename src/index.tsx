@@ -11,6 +11,8 @@ import 'normalize.css';
 import 'reset-css-complete/reset.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import "swiper/components/navigation/navigation.min.css";
+import 'swiper/swiper.scss';
 import './style.scss';
 
 function isTouchDevice() {

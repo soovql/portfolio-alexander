@@ -41,16 +41,19 @@ const Cursor: React.FC<Props> = (props) => {
         setHidden(false);
     };
 
-
     useEffect(() => {
 
         const addLinkEvents = () => {
-            document.querySelectorAll('a:not(.noclick)').forEach((el) => {
+            document.querySelectorAll('a:not(.noclick), input').forEach((el) => {
                 el.addEventListener('mouseover', () => setLinkHover(true));
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });
-            document.querySelectorAll('.link').forEach((el) => {
-                el.addEventListener('mouseover', () => setLinkHover(true));
+            document.querySelectorAll('.link, .modal_button').forEach((el) => {
+                el.addEventListener('mouseover', () => {
+                        setLinkHover(true);
+                        console.log("ok")
+                    }
+                );
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });
         };
@@ -63,14 +66,15 @@ const Cursor: React.FC<Props> = (props) => {
         };
 
         const arrowRightEvents = () => {
-            document.querySelectorAll('.arrow_direction_right',).forEach((el) => {
+            document.querySelectorAll('.arrow_direction_right').forEach((el) => {
                 el.addEventListener('mouseover', () => setArrowHoverRight(true));
                 el.addEventListener('mouseout', () => setArrowHoverRight(false));
             });
         };
 
+
         const hoverPictureEvents = () => {
-            document.querySelectorAll('.slick-current .picture').forEach((el) => {
+            document.querySelectorAll('.pictureBorderFrame').forEach((el) => {
                 console.log(activeItem, 'cursor');
                 el.addEventListener('mouseover', () => setPictureHover(true));
                 el.addEventListener('mouseout', () => setPictureHover(false));

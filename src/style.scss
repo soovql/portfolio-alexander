@@ -13,6 +13,8 @@ body:not(.mobile) {
   }
 }
 
+::selection { background: rgba(255, 255, 255, 0.15); }
+
 body, html {
   font-family: 'Rubik', sans-serif !important;
   background-color: #000;
@@ -20,7 +22,6 @@ body, html {
   height: 100%;
   margin: 0;
 }
-
 
 #root, .wrapper {
   height: 100%;
@@ -71,4 +72,10 @@ html {
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
   background: #FFFFFF;
+}
+
+.img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
 }
