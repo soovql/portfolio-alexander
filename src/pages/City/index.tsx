@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Logo } from '../../components/Logo';
-import {useState} from "react";
-import {Burger} from "../../components/Burger";
-import {MenuPopup} from "../../components/MenuPopup";
-import {Cursor} from "../../components/Cursor";
+import { useState } from 'react';
+import { Burger } from '../../components/Burger';
+import { MenuPopup } from '../../components/MenuPopup';
+import { Cursor } from '../../components/Cursor';
 
 type Props = {
-  parentClass?: string;
+    parentClass?: string;
 };
 
 const City: React.FC<Props> = (props) => {
@@ -17,15 +17,8 @@ const City: React.FC<Props> = (props) => {
     return (
         <div className={blockClass}>
             <Cursor />
-            <Logo
-                parentClass={blockClass}
-                isHidden={open}
-            />
-            <Burger
-                parentClass={blockClass}
-                open={open}
-                setOpen={setOpen}
-            />
+            <Logo parentClass={blockClass} isHidden={open} />
+            <Burger parentClass={blockClass} open={open} setOpen={setOpen} />
             <MenuPopup parentClass={blockClass} open={open} />
         </div>
     );

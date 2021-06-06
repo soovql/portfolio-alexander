@@ -1,37 +1,25 @@
 import * as React from 'react';
-import ReactModal from "react-modal";
-import classNames from "classnames";
+import classNames from 'classnames';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useState } from "react";
-import { useModal } from "react-modal-hook";
-import * as TEXT from "../../nature.json";
-import SwiperCore, {
-    Pagination,Navigation
-} from 'swiper/core';
-import { ReactComponent as HorizontalButton } from '../../styles/images/modal_icons/horizontal.svg';
-import { ReactComponent as VerticalButton } from '../../styles/images/modal_icons/vertical.svg';
-import { ReactComponent as BuyButton } from '../../styles/images/modal_icons/buy.svg';
-import { ReactComponent as ZoomButton } from '../../styles/images/modal_icons/zoom.svg';
-import { ReactComponent as CloseButton } from '../../styles/images/modal_icons/close.svg';
-import {Cursor} from "../Cursor";
+import { useEffect, useState } from 'react';
+import * as TEXT from '../../nature.json';
+import SwiperCore, { Pagination, Navigation } from 'swiper/core';
+import { Modal } from './Modal';
 
-SwiperCore.use([Pagination,Navigation]);
+SwiperCore.use([Pagination, Navigation]);
 
 type IGallerySliderProps = {
-    templates: { (arg0: number): { (): any; new(): any; default: string | undefined; }; keys: () => number[]; };
+    templates: { (arg0: number): { (): any; new (): any; default: string | undefined }; keys: () => number[] };
     open: boolean;
     setActive: (v: number) => void;
 };
 
-const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(function Slider(
-    props,
-    ref
-) {
+const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(function Slider(props, ref) {
     const { templates, open, setActive } = props;
     // слайд, с которого начинается карусель
     const initial_slide = 4;
     // считаем количество слайдов для скролла
-    const total_amount = templates.keys().length ;
+    const total_amount = templates.keys().length;
     const amount_of_pictures = total_amount - 1;
     const based_animation_transition = 500;
     // считаем длину и передаем её в css инпута
@@ -39,196 +27,144 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
 
     const [slideIndex, setSlideIndex] = useState(initial_slide);
     const [swiper, setSwiper] = useState<any>(null);
-
-    const [showModal, hideModal] = useModal(() => {
-        const current_item = slideIndex;
-        const current_image = templates(templates.keys()[current_item]).default;
-        const name_of_pic = `./${current_item + 1}.jpg`;
-        //проверяем, что у фотографии есть горизональное отображение
-        const horizontal = require.context('../../styles/images/nature/horizontal/', true, /\.(jpg|jpeg)$/) as any;
-        const has_horizontal = horizontal.keys().includes(name_of_pic);
-        //проверяем, что есть зум, хотя он должен быть всегда
-        const zoomed = require.context('../../styles/images/nature/zoomed/', true, /\.(jpg|jpeg)$/) as any;
-        const has_zoom = zoomed.keys().includes(name_of_pic);
-
-        const showHorizontal = () => {
-            const current_pic = document.getElementById("modal_pic") as HTMLImageElement;
-            current_pic.src=`${horizontal(name_of_pic).default}`;
-        }
-
-        const showVertical = () => {
-            const current_pic = document.getElementById("modal_pic") as HTMLImageElement;
-            current_pic.src=`${current_image}`;
-        }
-
-        const showZoomed= () => {
-            const current_pic = document.getElementById("modal_pic") as HTMLImageElement;
-            current_pic.src=`${zoomed(name_of_pic).default}`;
-        }
-
-        return (
-            <ReactModal
-                isOpen
-                className="Modal"
-                ariaHideApp={false}
-            >
-                <img className="modal_picture" id="modal_pic" src={current_image} alt=""/>
-                <div className="buttons">
-                    <button className="modal_button button_close" onClick={hideModal}>
-                        <CloseButton/>
-                    </button>
-                    <button
-                        className="button_buy"
-                        // onClick={openBuyMenu}
-                    >
-                        <BuyButton/>
-                    </button>
-                    <div className="resize_buttons">
-                        <button className="modal_button button_vertical" onClick={showVertical}>
-                            <VerticalButton/>
-                        </button>
-                        {has_horizontal &&
-                            <button className="modal_button button_horizontal" onClick={showHorizontal}>
-                                <HorizontalButton />
-                            </button>
-                        }
-                        {has_zoom &&
-                            <button className="modal_button button_zoom" onClick={showZoomed}>
-                                <ZoomButton />
-                            </button>
-                        }
-                    </div>
-                </div>
-            </ReactModal>
-        );
-    },[slideIndex]);
+    const [modalOpened, showModal] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
-        let previous_previous;
+            let previous_previous;
 
-        const center = document.getElementsByClassName('swiper-slide-active')[0] as HTMLElement;
-        const previous = document.getElementsByClassName('swiper-slide-prev')[0] as HTMLElement;
-        const all_slides = document.querySelectorAll('.swiper-slide')
+            const center = document.getElementsByClassName('swiper-slide-active')[0] as HTMLElement;
+            const previous = document.getElementsByClassName('swiper-slide-prev')[0] as HTMLElement;
+            const all_slides = document.querySelectorAll('.swiper-slide');
 
-        if (center.dataset.swiperSlideIndex !== "0") {
-            for (let i = 0; i < all_slides.length; i++) {
-                all_slides[i].classList.remove('swiper-slide-prev-prev');
+            if (center.dataset.swiperSlideIndex !== '0') {
+                for (let i = 0; i < all_slides.length; i++) {
+                    all_slides[i].classList.remove('swiper-slide-prev-prev');
+                }
+                previous_previous = previous.previousSibling as HTMLElement;
+                previous_previous?.classList.add('swiper-slide-prev-prev');
             }
-            previous_previous = previous.previousSibling as HTMLElement;
-            previous_previous?.classList.add('swiper-slide-prev-prev');
-        }
 
-        // так hover не активируется во время перелистывания
-        // setTimeout(() => {
-        //     const center_slide = (document.getElementsByClassName('swiper-slide-active')[0]) as HTMLElement;
-        //     center_slide.classList.add('hovering');
-        //     return [];
-        // }, 2000)
-        // const previous_previous_previous = previous_previous.previousSibling as HTMLElement;
-        // const next_next = next.nextElementSibling as HTMLElement;
-        // const next_next_next = next_next.nextElementSibling as HTMLElement;
+            // так hover не активируется во время перелистывания
+            // setTimeout(() => {
+            //     const center_slide = (document.getElementsByClassName('swiper-slide-active')[0]) as HTMLElement;
+            //     center_slide.classList.add('hovering');
+            //     return [];
+            // }, 2000)
+            // const previous_previous_previous = previous_previous.previousSibling as HTMLElement;
+            // const next_next = next.nextElementSibling as HTMLElement;
+            // const next_next_next = next_next.nextElementSibling as HTMLElement;
 
-        // previous.setAttribute("class", "");
-        // previous.classList.add('previous', 'slick-slide');
-        //
-        // previous_previous.setAttribute("class", "");
-        //
-        // previous_previous_previous.setAttribute("class", "");
-        // previous_previous_previous.classList.add('previous-previous-previous', 'slick-slide');
-        //
-        // next.setAttribute("class", "");
-        // next.classList.add('next', 'slick-slide');
-        //
-        // next_next.setAttribute("class", "");
-        // next_next.classList.add('next-next', 'slick-slide');
-        //
-        // next_next_next.setAttribute("class", "");
-        // next_next_next.classList.add('next-next-next', 'slick-slide');
-        }, 100)
-    }, [slideIndex])
+            // previous.setAttribute("class", "");
+            // previous.classList.add('previous', 'slick-slide');
+            //
+            // previous_previous.setAttribute("class", "");
+            //
+            // previous_previous_previous.setAttribute("class", "");
+            // previous_previous_previous.classList.add('previous-previous-previous', 'slick-slide');
+            //
+            // next.setAttribute("class", "");
+            // next.classList.add('next', 'slick-slide');
+            //
+            // next_next.setAttribute("class", "");
+            // next_next.classList.add('next-next', 'slick-slide');
+            //
+            // next_next_next.setAttribute("class", "");
+            // next_next_next.classList.add('next-next-next', 'slick-slide');
+        }, 100);
+    }, [slideIndex]);
 
     useEffect(() => {
         const center = document.getElementsByClassName('pictureBorderFrame')[0] as HTMLElement;
-        center.addEventListener('click', showModal, false);
-    }, [showModal]);
+        center.addEventListener('click', () => showModal(true), false);
+    }, [modalOpened]);
 
     const runInit = () => {
         setTimeout(() => {
             const center = document.getElementsByClassName('swiper-slide-active')[0] as HTMLElement;
             center.classList.add('init');
-        }, 10)
+        }, 10);
     };
 
     const renderGalleryItems = () => {
-        return  templates.keys().map((elem: number, i: number) => (
+        return templates.keys().map((elem: number, i: number) => (
             <SwiperSlide key={i} virtualIndex={i}>
                 <div className="imageContainer">
                     <div className="extraWrapper">
-                        <img className="picture" key={elem} src={templates(elem).default} alt={`${TEXT[i].title} Саша Стюхин Пейзажист`} />
-                        <div className="pictureBorder"/>
+                        <img
+                            className="picture"
+                            key={elem}
+                            src={templates(elem).default}
+                            alt={`${TEXT[i].title} Саша Стюхин Пейзажист`}
+                        />
+                        <div className="pictureBorder" />
                     </div>
                 </div>
 
-                {!open &&
-                <div className="textBlock">
-                    <div className="title">{TEXT[i].title}</div>
-                    <div className="location">{TEXT[i].location}</div>
-                </div>
-                }
+                {!open && (
+                    <div className="textBlock">
+                        <div className="title">{TEXT[i].title}</div>
+                        <div className="location">{TEXT[i].location}</div>
+                    </div>
+                )}
             </SwiperSlide>
-        ))
+        ));
     };
 
     return (
-        <div className={classNames('gallerySlider', open && 'blurred')}>
+        <>
+            <div className={classNames('gallerySlider', open && 'blurred')}>
+                <div className="pictureBg" />
+                <div className="pictureBorderFrame" />
 
-            <div className="pictureBg"/>
-            <div className="pictureBorderFrame"/>
-
-            <Swiper
-                onInit={() => runInit()}
-                onSwiper={(swiper) => setSwiper(swiper)}
-                allowTouchMove={true}
-                initialSlide={initial_slide}
-                grabCursor={false}
-                spaceBetween={0}
-                speed={1000}
-                centeredSlides={true}
-                slidesPerView='auto'
-                onSlideChange={
-                    (swiper) => {
+                <Swiper
+                    onInit={() => runInit()}
+                    onSwiper={(swiper) => setSwiper(swiper)}
+                    allowTouchMove={true}
+                    initialSlide={initial_slide}
+                    grabCursor={false}
+                    spaceBetween={0}
+                    speed={1000}
+                    centeredSlides={true}
+                    slidesPerView="auto"
+                    onSlideChange={(swiper) => {
                         setSlideIndex(swiper.realIndex);
                         setActive(swiper.realIndex);
-                    }
-                }
-                pagination={{
-                    "clickable": true
-                }}
-                slideToClickedSlide={true}
-                // включаю свайп на мобильных
-                breakpoints={{
-                    "598": {
-                        allowTouchMove: false
-                    },
-                }}
-            >
-                {renderGalleryItems()}
-            </Swiper>
+                    }}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    slideToClickedSlide={true}
+                    // включаю свайп на мобильных
+                    breakpoints={{
+                        '598': {
+                            allowTouchMove: false,
+                        },
+                    }}
+                >
+                    {renderGalleryItems()}
+                </Swiper>
 
-            {!open && <input
-                onChange={
-                    e => swiper.slideTo(Number(e.target.value), based_animation_transition)
-                }
-                value={slideIndex}
-                type="range"
-                min={0}
-                max={amount_of_pictures}
-                style={{"width": `${input_width}px`}}
-            />}
-        </div>
+                {!open && (
+                    <input
+                        onChange={(e) => swiper.slideTo(Number(e.target.value), based_animation_transition)}
+                        value={slideIndex}
+                        type="range"
+                        min={0}
+                        max={amount_of_pictures}
+                        style={{ width: `${input_width}px` }}
+                    />
+                )}
+            </div>
+            <Modal
+                parentClass="gallerySlider"
+                slideIndex={slideIndex}
+                templates={templates}
+                open={modalOpened}
+                setOpen={showModal}
+            />
+        </>
     );
 });
-
 
 export { GallerySlider };

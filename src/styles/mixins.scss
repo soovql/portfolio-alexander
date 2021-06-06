@@ -17,6 +17,13 @@ $desktop-width: 1024px;
   -webkit-transform: translateY(-50%);
 }
 
+@mixin absolute_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @mixin mobile {
   @media (max-width: #{$tablet-width - 1px}) {
     @content;
@@ -24,7 +31,7 @@ $desktop-width: 1024px;
 }
 
 @mixin tablet {
-  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+  @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width}) {
     @content;
   }
 }
@@ -36,7 +43,7 @@ $desktop-width: 1024px;
 }
 
 @mixin desktop {
-  @media (min-width: #{$desktop-width}) {
+  @media (min-width: #{$tablet-width + 1px}) {
     @content;
   }
 }

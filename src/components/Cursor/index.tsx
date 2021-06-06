@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 type Props = {
@@ -42,7 +42,6 @@ const Cursor: React.FC<Props> = (props) => {
     };
 
     useEffect(() => {
-
         const addLinkEvents = () => {
             document.querySelectorAll('a:not(.noclick), input').forEach((el) => {
                 el.addEventListener('mouseover', () => setLinkHover(true));
@@ -50,10 +49,9 @@ const Cursor: React.FC<Props> = (props) => {
             });
             document.querySelectorAll('.link, .modal_button').forEach((el) => {
                 el.addEventListener('mouseover', () => {
-                        setLinkHover(true);
-                        console.log("ok")
-                    }
-                );
+                    setLinkHover(true);
+                    console.log('ok');
+                });
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });
         };
@@ -71,7 +69,6 @@ const Cursor: React.FC<Props> = (props) => {
                 el.addEventListener('mouseout', () => setArrowHoverRight(false));
             });
         };
-
 
         const hoverPictureEvents = () => {
             document.querySelectorAll('.pictureBorderFrame').forEach((el) => {
@@ -99,7 +96,7 @@ const Cursor: React.FC<Props> = (props) => {
                 linkHover && 'hover',
                 pictureHover && 'picture',
                 arrowHoverLeft && 'arrow-left',
-                arrowHoverRight && 'arrow-right'
+                arrowHoverRight && 'arrow-right',
             )}
             style={{
                 left: `${position.x}px`,
@@ -107,6 +104,6 @@ const Cursor: React.FC<Props> = (props) => {
             }}
         />
     );
-}
+};
 
 export { Cursor };

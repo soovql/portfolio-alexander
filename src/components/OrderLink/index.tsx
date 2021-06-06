@@ -8,15 +8,13 @@ type Props = {
 };
 
 const OrderLink: React.FC<Props> = (props) => {
-    const { auxClass, url, text} = props;
+    const { auxClass, url, text } = props;
 
     const blockClass = 'orderLink';
 
     return (
-        <div className={cn(blockClass)({type: auxClass})}>
-            <a  href={url}>
-                {text}
-            </a>
+        <div className={cn(blockClass)({ type: auxClass })}>
+            <a href={url}>{text}</a>
         </div>
     );
 };

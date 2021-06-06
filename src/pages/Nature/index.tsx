@@ -1,40 +1,28 @@
 import * as React from 'react';
 import { Logo } from '../../components/Logo';
-import { useState } from "react";
-import { ModalProvider } from "react-modal-hook";
-import {Burger} from "../../components/Burger";
-import {MenuPopup} from "../../components/MenuPopup";
-import {Cursor} from "../../components/Cursor";
-import {GallerySlider} from "../../components/GallerySlider";
-
+import { useState } from 'react';
+import { Burger } from '../../components/Burger';
+import { MenuPopup } from '../../components/MenuPopup';
+import { Cursor } from '../../components/Cursor';
+import { GallerySlider } from '../../components/GallerySlider';
 
 const Nature: React.FC = (props) => {
-  const [open, setOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [activeItem, setActiveItem] = useState(0);
 
-  const blockClass = 'nature';
+    const blockClass = 'nature';
 
-  const templates = require.context('../../styles/images/nature/gallery/', true, /\.(jpg|jpeg)$/) as any;
+    const templates = require.context('../../styles/images/nature/gallery/', true, /\.(jpg|jpeg)$/) as any;
 
-  return (
-      <ModalProvider>
-        <Cursor activeItem={activeItem}/>
+    return (
         <div className={blockClass}>
-            <Logo
-                parentClass={blockClass}
-                isHidden={open}
-            />
-            <Burger
-                parentClass={blockClass}
-                open={open}
-                setOpen={setOpen}
-                color="#3C3C3C"
-            />
+            <Cursor activeItem={activeItem} />
+            <Logo parentClass={blockClass} isHidden={open} />
+            <Burger parentClass={blockClass} open={open} setOpen={setOpen} color="#3C3C3C" />
             <MenuPopup parentClass={blockClass} open={open} />
-            <GallerySlider templates={templates} open={open} setActive={setActiveItem}/>
+            <GallerySlider templates={templates} open={open} setActive={setActiveItem} />
         </div>
-      </ModalProvider>
-  );
+    );
 };
 
 export { Nature };

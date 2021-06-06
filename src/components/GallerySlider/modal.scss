@@ -1,62 +1,159 @@
 @import '../../styles/mixins.scss';
 
-.ReactModalPortal {
+.gallerySlider-modal {
+  position: fixed;
+  top: 0;
+  background-color: #141414;
+  height: 100%;
+  width: 100%;
+  padding: 40px 180px;
+  box-sizing: border-box;
+  z-index: 3;
+  visibility: hidden;
+  opacity: 0;
 
-  .ReactModal__Overlay {
-    z-index: 3;
-  }
+  &.open {
+    visibility: visible;
+    opacity: 1;
 
-  .Modal {
-    position: relative;
-    background-color: #000;
-    height: 100%;
-    padding: 40px 180px;
-    box-sizing: border-box;
+    .modal_picture {
+      transform: scale(1);
+    }
 
-    @include mobile_and_tablet {
-      padding: 0;
+    .buttons {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 200ms ease-in;
+      transition-delay: 300ms;
     }
   }
 
+  @include mobile_and_tablet {
+    padding: 0;
+  }
+
+  .imageContainer {
+    position: relative;
+    height: 100%;
+  }
+
   .modal_picture {
+    position: absolute;
     margin: 0 auto;
     display: block;
     height: 100%;
     width: 100%;
     object-fit: contain;
+    transform: scale(0.6);
+    transition: all 300ms ease-in;
 
-    @include mobile_and_tablet {
-      object-fit: cover;
+    //@include mobile_and_tablet {
+    //  object-fit: cover;
+    //}
+
+    &#vertical {
+      @include mobile_and_tablet {
+        object-fit: cover;
+      }
+    }
+
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
     }
   }
 
   .buttons {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
 
     @include desktop {
       display: flex;
       flex-direction: column;
-      top: 98px;
-      right: 86px;
+      align-items: center;
+      top: 81px;
+      right: 0;
+      left: auto;
+      width: 180px;
     }
-  }
 
-  .modal_button {
-    height: 28px;
-    width: 28px;
+    .modal_button {
+      position: relative;
 
-    svg:hover {
-      path {
-        stroke: cornflowerblue;
+      svg {
+        @include absolute_center;
       }
     }
   }
 
+  // верхние кнопки
+  .action_buttons {
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+
+      button + button {
+        margin-top: 30px;
+      }
+    }
+
+    @include tablet {
+      position: absolute;
+      top: 65px;
+      left: 60px;
+      right: 65px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @include mobile {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      right: 42px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .modal_button {
+      height: 50px;
+      width: 50px;
+
+      &_type_close {
+        background-color: #000;
+        border-radius: 50%;
+      }
+
+      &_type_buy {
+        background-color: #fff;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  // нижние кнопки
   .resize_buttons {
     display: flex;
     flex-direction: column;
+
+    .modal_button {
+      height: 28px;
+      width: 28px;
+
+      svg:hover {
+        path {
+          stroke: cornflowerblue;
+        }
+      }
+    }
 
     button + button {
       margin-top: 24px;
@@ -65,5 +162,18 @@
     @include desktop {
       margin-top: 147px;
     }
+
+    @include tablet {
+      position: absolute;
+      bottom: 70px;
+      right: 71px;
+    }
+
+    @include mobile {
+      position: absolute;
+      bottom: 50px;
+      right: 51px;
+    }
   }
 }
+

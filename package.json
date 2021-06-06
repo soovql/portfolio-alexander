@@ -68,6 +68,7 @@
     "webpack-dev-server": "^3.11.1"
   },
   "scripts": {
+    "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
     "start": "webpack serve --config webpack.dev.config.ts",
     "build": "webpack --config webpack.prod.config.ts",
     "prettier-format": "prettier --config .prettierrc 'src/*.{js,ts,jsx,tsx}' --write"

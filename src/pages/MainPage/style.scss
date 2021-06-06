@@ -41,10 +41,13 @@
 
   &-menu, &-social {
     z-index: 2;
-    display: none;
 
     @include desktop {
       display: block;
+    }
+
+    @include tablet {
+      display: none;
     }
   }
 

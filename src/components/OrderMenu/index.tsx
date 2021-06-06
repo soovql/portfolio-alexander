@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
-import {OrderLink} from "../OrderLink";
+import { OrderLink } from '../OrderLink';
 
 type Props = {
     parentClass?: string;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const OrderMenu: React.FC<Props> = (props) => {
-    const { parentClass} = props;
+    const { parentClass } = props;
 
     const blockClass = 'orderMenu';
     const rootClass = cn(parentClass as string);
@@ -18,28 +18,16 @@ const OrderMenu: React.FC<Props> = (props) => {
         <nav className={rootClass(blockClass, [blockClass])}>
             <ul>
                 <li>
-                    <OrderLink
-                        text="принты"
-                        url={'#prints'}
-                    />
+                    <OrderLink text="принты" url={'#prints'} />
                 </li>
                 <li>
-                    <OrderLink
-                        text="съемки"
-                        url={'#shoots'}
-                    />
+                    <OrderLink text="съемки" url={'#shoots'} />
                 </li>
                 <li>
-                    <OrderLink
-                        text="фототуры"
-                        url={'#tours'}
-                    />
+                    <OrderLink text="фототуры" url={'#tours'} />
                 </li>
                 <li>
-                    <OrderLink
-                        text="ещё"
-                        url={'#more'}
-                    />
+                    <OrderLink text="ещё" url={'#more'} />
                 </li>
             </ul>
         </nav>

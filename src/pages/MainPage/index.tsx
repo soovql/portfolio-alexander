@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState} from 'react';
+import { useState } from 'react';
 import { Social } from '../../components/Social';
 import { Menu } from '../../components/Menu';
 import { Burger } from '../../components/Burger';
@@ -7,12 +7,12 @@ import { MenuPopup } from '../../components/MenuPopup';
 import { Logo } from '../../components/Logo';
 import { MainPageLogoColors, MainPageBurgerColors, MainPageBurgerLineColors } from '../../logoColors';
 import { Slider } from '../../components/Slider';
-import { Cursor } from "../../components/Cursor";
+import { Cursor } from '../../components/Cursor';
 
 const MainPage: React.FC = (props) => {
-  const blockClass = 'mainPage';
-  const [open, setOpen] = useState(false);
-  const [color, changeColor] = useState(0);
+    const blockClass = 'mainPage';
+    const [open, setOpen] = useState(false);
+    const [color, changeColor] = useState(0);
 
     return (
         <div className={blockClass}>
@@ -38,7 +38,7 @@ const MainPage: React.FC = (props) => {
             />
             <MenuPopup parentClass={blockClass} open={open} />
         </div>
-  );
+    );
 };
 
 export { MainPage };
