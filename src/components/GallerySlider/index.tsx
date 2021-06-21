@@ -15,7 +15,7 @@ type IGallerySliderProps = {
 };
 
 const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(function Slider(props, ref) {
-    const { templates, open, setActive } = props;
+    const { templates, open, setActive, ...rest  } = props;
     // слайд, с которого начинается карусель
     const initial_slide = 4;
     // считаем количество слайдов для скролла
@@ -86,6 +86,18 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
         }, 10);
     };
 
+    useEffect(() => {
+        const close = (e: { keyCode: number; }) => {
+            if (!modalOpened && document.activeElement?.tagName === "INPUT") {
+                if(e.keyCode === 13){
+                    showModal(!modalOpened);
+                }
+            }
+        }
+        window.addEventListener('keydown', close)
+        return () => window.removeEventListener('keydown', close)
+    },[showModal, modalOpened])
+
     const renderGalleryItems = () => {
         return templates.keys().map((elem: number, i: number) => (
             <SwiperSlide key={i} virtualIndex={i}>
@@ -113,7 +125,11 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
 
     return (
         <>
-            <div className={classNames('gallerySlider', open && 'blurred')}>
+            <div
+                {...rest}
+                className={classNames('gallerySlider', open && 'blurred')}
+                ref={ref}
+            >
                 <div className="pictureBg" />
                 <div className="pictureBorderFrame" />
 

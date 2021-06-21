@@ -1,0 +1,195 @@
+@import '../../styles/mixins.scss';
+
+.modalBuy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #131313;
+  opacity: 0;
+  visibility: hidden;
+
+  &.open {
+    visibility: visible;
+    z-index: 4;
+    opacity: 1;
+
+    @include mobile_and_tablet {
+      background: rgba(19, 19, 19, 0.83)
+      // @todo add filter to paretn when opened
+    }
+  }
+
+  &-buttons {
+    position: absolute;
+    top: 0;
+    right: 75px;
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &-priceList {
+
+    //свободное место под иконки
+    padding-left: 43px;
+
+    &-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      color: #626262;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: -43px;
+        top: 0;
+        height: 26px;
+        width: 26px;
+        background-image: url("styles/images/modal_icons/circle.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      &:not(.active):hover, &:active {
+        filter: brightness(1.7);
+      }
+
+      &.active {
+        color: #FFFFFF;
+
+        &:before {
+          background-image: url("styles/images/modal_icons/circle_active.svg");
+        }
+      }
+
+      + .modalBuy-priceList-item {
+        margin-top: 25px;
+      }
+
+      &Size {
+        position: relative;
+        margin-bottom: 2px;
+        font-size: 20px;
+      }
+
+      &Price {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &-next {
+    position: absolute;
+    bottom: 114px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: lowercase;
+    font-weight: 300;
+    font-size: 25px;
+    margin-top: 58px;
+
+    @include tablet {
+      bottom: 89px;
+    }
+
+    @include mobile {
+      bottom: 50px;
+    }
+  }
+
+  &-back {
+    font-size: 0;
+    position: absolute;
+    top: 161px;
+    right: 74px;
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("styles/images/modal_icons/back.svg");
+
+    @include tablet {
+      top: 65px;
+      left: 60px;
+    }
+
+    @include mobile {
+      top: 40px;
+      left: 42px;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 28px;
+      width: 28px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("styles/images/modal_icons/back_arrow.svg");
+    }
+  }
+
+  &-form {
+    position: relative;
+    width: 281px;
+
+    input {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      color: #FFFFFF;
+
+      &::placeholder {
+        color: #626262;
+        font-size: 20px;
+        font-weight: 300;
+        letter-spacing: -0.03em;
+      }
+
+      &:focus{
+        outline: none;
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 350px;
+      height: 1px;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+
+      //@todo че по числам
+      @include mobile_and_tablet {
+        width: 300px;
+      }
+    }
+  }
+
+  &-final {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+  }
+}
+

@@ -15,9 +15,11 @@ input[type=range] {
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
   }
-  &:focus {
-    outline: none;
-  }
+
+  //&:focus {
+  //  outline: none;
+  //}
+
   &::-ms-track {
     width: 100%;
     cursor: pointer;

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useEffect } from 'react';
-import { cn } from '@bem-react/classname';
+import {useEffect, useState} from 'react';
 import classNames from 'classnames';
-import { ReactComponent as CloseButton } from '../../styles/images/modal_icons/close.svg';
+import { cn } from '@bem-react/classname';
+import { BuyModal } from "./BuyModal";
 import { ReactComponent as BuyButton } from '../../styles/images/modal_icons/buy.svg';
 import { ReactComponent as VerticalButton } from '../../styles/images/modal_icons/vertical.svg';
 import { ReactComponent as HorizontalButton } from '../../styles/images/modal_icons/horizontal.svg';
@@ -17,13 +17,15 @@ type IModalProps = {
     templates: { (arg0: number): { (): any; new (): any; default: string | undefined }; keys: () => number[] };
 };
 
-const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function MenuPopup(props, ref) {
-    const { parentClass, slideIndex, setOpen, open, templates, ...rest } = props;
+const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props, ref) {
+    const { parentClass, slideIndex, setOpen, open, templates,...rest } = props;
 
     const blockClass = cn('modal');
     const rootClass = cn(parentClass as string);
     const button_class = cn("modal_button");
     const image_class = cn("modal_picture");
+
+    const [buyModalOpened, openBuyModal] = useState(false);
 
     const current_item = slideIndex;
     const current_image = templates(templates.keys()[current_item]).default;
@@ -50,67 +52,86 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function MenuPopup(p
     const showHorizontal = () => {
         horizontal_picture.classList.remove('hidden');
         vertical_picture.classList.add('hidden');
-        zoomed_picture.classList.add('hidden');
+        has_zoom ? zoomed_picture.classList.add('hidden') : undefined;
     };
 
     const showVertical = () => {
         vertical_picture.classList.remove('hidden');
-        horizontal_picture.classList.add('hidden');
-        zoomed_picture.classList.add('hidden');
+        has_horizontal ? horizontal_picture.classList.add('hidden') : undefined;
+        has_zoom ? zoomed_picture.classList.add('hidden') : undefined;
     };
 
     const showZoomed = () => {
         vertical_picture.classList.add('hidden');
-        horizontal_picture.classList.add('hidden');
+        has_horizontal ? horizontal_picture.classList.add('hidden') : undefined;
         zoomed_picture.classList.remove('hidden');
     };
 
     useEffect(() => {
         const close = (e: { keyCode: number; }) => {
-            if(e.keyCode === 27){
-                setOpen(!open);
+            if (open) {
+                if(e.keyCode === 27){
+                    setOpen(!open);
+                }
             }
         }
         window.addEventListener('keydown', close)
         return () => window.removeEventListener('keydown', close)
     },[setOpen, open])
 
+
     return (
         <div {...rest} className={classNames(rootClass(blockClass()), blockClass(), open && 'open')} ref={ref}>
-            <div className="imageContainer">
-                <img className={image_class()} id="vertical" src={current_image} alt={`${TEXT[0].title} Саша Стюхин Пейзажист`} />
-                {has_horizontal && horizontal_image}
-                {has_zoom && zoomed_image}
-            </div>
+            <>
+                {/*@todo возможно блюр удалить*/}
+                <div className={blockClass('imageContainer', [buyModalOpened ? 'blur' : undefined])}>
+                    <img className={image_class()} id="vertical" src={current_image} alt={`${TEXT[0].title} Саша Стюхин Пейзажист`} />
+                    {has_horizontal && horizontal_image}
+                    {has_zoom && zoomed_image}
+                </div>
 
-            <div className="buttons">
-                <div className="action_buttons">
-                    <button className={button_class({type: "close"})} onClick={() => setOpen(!open)}>
-                        <CloseButton />
-                    </button>
-                    <button
-                        className={button_class({type: "buy"})}
-                        // onClick={openBuyMenu}
-                    >
-                        <BuyButton />
-                    </button>
-                </div>
-                <div className="resize_buttons">
-                    <button className={button_class({type: "vertical"})} onClick={showVertical}>
-                        <VerticalButton />
-                    </button>
-                    {has_horizontal && (
-                        <button className={button_class({type: "horizontal"})} onClick={showHorizontal}>
-                            <HorizontalButton />
+                <div className="buttons">
+                    <div className="action_buttons">
+                        <button
+                            className={button_class({type: "close"})}
+                            onClick={
+                                () => {
+                                    setOpen(!open);
+                                    openBuyModal(!open);
+                                    showVertical();
+                                }
+                            }
+                        >
+                            <div className='bar'/>
+                            <div className='bar'/>
                         </button>
-                    )}
-                    {has_zoom && (
-                        <button className={button_class({type: "zoom"})} onClick={showZoomed}>
-                            <ZoomButton />
+                        <button
+                            className={button_class({type: "buy"}, [buyModalOpened ? 'hidden' : undefined])}
+                            onClick={() => openBuyModal(true)}
+                        >
+                            <BuyButton />
                         </button>
-                    )}
+                    </div>
+
+                    <div className={blockClass('resize_buttons', [buyModalOpened ? 'hidden' : undefined])}>
+                        <button className={button_class({type: "vertical"})} onClick={showVertical}>
+                            <VerticalButton />
+                        </button>
+                        {has_horizontal && (
+                            <button className={button_class({type: "horizontal"})} onClick={showHorizontal}>
+                                <HorizontalButton />
+                            </button>
+                        )}
+                        {has_zoom && (
+                            <button className={button_class({type: "zoom"})} onClick={showZoomed}>
+                                <ZoomButton />
+                            </button>
+                        )}
+                    </div>
+
                 </div>
-            </div>
+            </>
+            <BuyModal open_buy={buyModalOpened} current_item={current_item}/>
         </div>
     );
 });

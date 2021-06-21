@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Logo } from '../../components/Logo';
-import { useState } from 'react';
+import { useState} from 'react';
 import { Burger } from '../../components/Burger';
 import { MenuPopup } from '../../components/MenuPopup';
 import { Cursor } from '../../components/Cursor';
@@ -16,7 +16,7 @@ const Nature: React.FC = (props) => {
 
     return (
         <div className={blockClass}>
-            <Cursor activeItem={activeItem} />
+            <Cursor activeItem={activeItem}/>
             <Logo parentClass={blockClass} isHidden={open} />
             <Burger parentClass={blockClass} open={open} setOpen={setOpen} color="#3C3C3C" />
             <MenuPopup parentClass={blockClass} open={open} />

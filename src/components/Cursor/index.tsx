@@ -50,7 +50,6 @@ const Cursor: React.FC<Props> = (props) => {
             document.querySelectorAll('.link, .modal_button').forEach((el) => {
                 el.addEventListener('mouseover', () => {
                     setLinkHover(true);
-                    console.log('ok');
                 });
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });

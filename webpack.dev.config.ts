@@ -26,8 +26,28 @@ const config: webpack.Configuration = {
                 },
             },
             {
-                test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader'],
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                            config: {
+                                path: 'postcss.config.js'
+                            }
+                        }
+                    },
+                    'sass-loader'
+                ],
             },
             {
                 test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
