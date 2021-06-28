@@ -9,16 +9,14 @@
   background: #131313;
   opacity: 0;
   visibility: hidden;
+  transition: opacity 250ms ease-out, visibility 250ms ease-out;
 
   &.open {
     visibility: visible;
+    background: rgba(19, 19, 19, 0.9);
     z-index: 4;
     opacity: 1;
-
-    @include mobile_and_tablet {
-      background: rgba(19, 19, 19, 0.83)
-      // @todo add filter to paretn when opened
-    }
+    transition: opacity 350ms ease-in, visibility 350ms ease-out;
   }
 
   &-buttons {
@@ -193,3 +191,12 @@
   }
 }
 
+//анимация
+.step, .step-enter-active, .step-exit {
+  opacity: 0;
+}
+
+.step-enter-done {
+  opacity: 1;
+  transition: opacity 350ms ease-out;
+}

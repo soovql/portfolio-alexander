@@ -43,7 +43,7 @@ const Cursor: React.FC<Props> = (props) => {
 
     useEffect(() => {
         const addLinkEvents = () => {
-            document.querySelectorAll('a:not(.noclick), input').forEach((el) => {
+            document.querySelectorAll('a:not(.noclick), input, .picture').forEach((el) => {
                 el.addEventListener('mouseover', () => setLinkHover(true));
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });
@@ -71,7 +71,6 @@ const Cursor: React.FC<Props> = (props) => {
 
         const hoverPictureEvents = () => {
             document.querySelectorAll('.pictureBorderFrame').forEach((el) => {
-                console.log(activeItem, 'cursor');
                 el.addEventListener('mouseover', () => setPictureHover(true));
                 el.addEventListener('mouseout', () => setPictureHover(false));
             });

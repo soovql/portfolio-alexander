@@ -24,7 +24,7 @@ const Size: React.FC<SizeProps> = (props) => {
 
     const blockClass = cn(parentClass);
 
-    const prices = TEXT[current_item].prices;
+    const prices = TEXT[current_item] ? TEXT[current_item].prices : TEXT[0].prices;
 
     const getPrices = () => {
 

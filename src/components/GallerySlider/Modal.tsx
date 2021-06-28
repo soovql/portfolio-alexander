@@ -3,11 +3,13 @@ import {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import { cn } from '@bem-react/classname';
 import { BuyModal } from "./BuyModal";
+import { GalleryTypes } from '../../GalleryTypes';
 import { ReactComponent as BuyButton } from '../../styles/images/modal_icons/buy.svg';
 import { ReactComponent as VerticalButton } from '../../styles/images/modal_icons/vertical.svg';
 import { ReactComponent as HorizontalButton } from '../../styles/images/modal_icons/horizontal.svg';
 import { ReactComponent as ZoomButton } from '../../styles/images/modal_icons/zoom.svg';
-import * as TEXT from "../../nature.json";
+import * as CITY_DATA from "../../city.json";
+import * as NATURE_DATA from "../../nature.json";
 
 type IModalProps = {
     parentClass: string;
@@ -15,15 +17,18 @@ type IModalProps = {
     open: boolean;
     setOpen: (v: boolean) => void;
     templates: { (arg0: number): { (): any; new (): any; default: string | undefined }; keys: () => number[] };
+    type: GalleryTypes;
 };
 
 const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props, ref) {
-    const { parentClass, slideIndex, setOpen, open, templates,...rest } = props;
+    const { parentClass, slideIndex, setOpen, open, templates, type, ...rest } = props;
 
     const blockClass = cn('modal');
     const rootClass = cn(parentClass as string);
     const button_class = cn("modal_button");
     const image_class = cn("modal_picture");
+
+    const TEXT = (type === "City" ? CITY_DATA : NATURE_DATA);
 
     const [buyModalOpened, openBuyModal] = useState(false);
 
@@ -131,7 +136,7 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
 
                 </div>
             </>
-            <BuyModal open_buy={buyModalOpened} current_item={current_item}/>
+            <BuyModal open_buy={buyModalOpened} current_item={current_item} setOpen={openBuyModal} type={type}/>
         </div>
     );
 });

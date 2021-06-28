@@ -31,19 +31,25 @@ $desktop-width: 1024px;
 }
 
 @mixin tablet {
-  @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width}) {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width}) {
     @content;
   }
 }
 
 @mixin mobile_and_tablet {
-  @media (max-width: #{$tablet-width }) {
+  @media (max-width: #{$desktop-width }) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$tablet-width + 1px}) {
+  @media (min-width: #{$desktop-width + 1px}) {
+    @content;
+  }
+}
+
+@mixin big-desktop {
+  @media (min-width: 1800px) {
     @content;
   }
 }

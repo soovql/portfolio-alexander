@@ -1,9 +1,9 @@
+@import '../../styles/mixins.scss';
 $range_bg: #3A3A3A; //rgba(255, 255, 255, 0.15)
 
 input[type=range] {
   //reset
   -webkit-appearance: none;
-  width: 100%;
   // increase clickable area
   padding: 7px 0;
   display: block;
@@ -12,13 +12,29 @@ input[type=range] {
   left: 50%;
   transform: translateX(-50%);
 
+  @include desktop {
+    width: 292px;
+  }
+
+  @include mobile_and_tablet {
+    width: 211px;
+  }
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
   }
 
-  //&:focus {
-  //  outline: none;
-  //}
+  @include desktop {
+    bottom: 48px;
+  }
+
+  @include tablet {
+    bottom: 43px;
+  }
+
+  @include mobile {
+    bottom: 33px;
+  }
 
   &::-ms-track {
     width: 100%;
@@ -36,9 +52,8 @@ input[type=range]::-webkit-slider-thumb {
   width: 22px;
   height: 3px;
   background-color: #fff;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  margin-top: -1px;
+  margin-top: -1.5px;
+  border-radius: 3px;
 
   &:before {
     position: absolute;
@@ -64,8 +79,7 @@ input[type=range]::-ms-thumb {
   height: 3px;
   margin-top: 0;
   background-color: #fff;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-radius: 3px;
 }
 
 //slider
@@ -73,15 +87,34 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 1px;
   background-color: $range_bg;
+  border-radius: 3px;
 }
 
 input[type=range]::-moz-range-track {
   width: 100%;
   height: 1px;
   background-color: $range_bg;
+  border-radius: 3px;
 }
-//input[type=range]::-ms-track {
-//  background: transparent;
-//  border-color: transparent;
-//  color: transparent;
-//}
+
+
+input[type=range].input_type_city::-webkit-slider-thumb {
+  background-color: #000;
+}
+
+input[type=range].input_type_city::-moz-range-thumb {
+  background-color: #000;
+}
+
+input[type=range].input_type_city::-ms-thumb {
+  background-color: #000;
+}
+
+input[type=range].input_type_city::-webkit-slider-runnable-track {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+input[type=range].input_type_city::-moz-range-track {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+

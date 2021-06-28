@@ -8,6 +8,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 
+  @include mobile {
+    background-image: url("pages/Nature/images/bg_mobile.jpg");
+  }
+
   &-burger {
     z-index: 2;
 

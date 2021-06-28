@@ -1,10 +1,13 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { cn } from '@bem-react/classname';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState } from 'react';
-import * as TEXT from '../../nature.json';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { Modal } from './Modal';
+import { GalleryTypes } from '../../GalleryTypes';
+import * as NATURE_DATA from '../../nature.json';
+import * as CITY_DATA from '../../city.json';
+
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -12,10 +15,11 @@ type IGallerySliderProps = {
     templates: { (arg0: number): { (): any; new (): any; default: string | undefined }; keys: () => number[] };
     open: boolean;
     setActive: (v: number) => void;
+    type: GalleryTypes;
 };
 
 const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(function Slider(props, ref) {
-    const { templates, open, setActive, ...rest  } = props;
+    const { templates, open, setActive, type, ...rest  } = props;
     // слайд, с которого начинается карусель
     const initial_slide = 4;
     // считаем количество слайдов для скролла
@@ -23,15 +27,18 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
     const amount_of_pictures = total_amount - 1;
     const based_animation_transition = 500;
     // считаем длину и передаем её в css инпута
-    const input_width = 22 * total_amount;
+    // const input_width = 22 * total_amount;
 
     const [slideIndex, setSlideIndex] = useState(initial_slide);
     const [swiper, setSwiper] = useState<any>(null);
     const [modalOpened, showModal] = useState(false);
 
+    const TEXT = (type === "City" ? CITY_DATA : NATURE_DATA);
+
     useEffect(() => {
         setTimeout(() => {
             let previous_previous;
+            let previous_previous_previous;
 
             const center = document.getElementsByClassName('swiper-slide-active')[0] as HTMLElement;
             const previous = document.getElementsByClassName('swiper-slide-prev')[0] as HTMLElement;
@@ -40,38 +47,14 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
             if (center.dataset.swiperSlideIndex !== '0') {
                 for (let i = 0; i < all_slides.length; i++) {
                     all_slides[i].classList.remove('swiper-slide-prev-prev');
+                    all_slides[i].classList.remove('swiper-slide-prev-prev-prev');
                 }
                 previous_previous = previous.previousSibling as HTMLElement;
                 previous_previous?.classList.add('swiper-slide-prev-prev');
+                previous_previous_previous = previous_previous.previousSibling as HTMLElement;
+                previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');
             }
-
-            // так hover не активируется во время перелистывания
-            // setTimeout(() => {
-            //     const center_slide = (document.getElementsByClassName('swiper-slide-active')[0]) as HTMLElement;
-            //     center_slide.classList.add('hovering');
-            //     return [];
-            // }, 2000)
-            // const previous_previous_previous = previous_previous.previousSibling as HTMLElement;
-            // const next_next = next.nextElementSibling as HTMLElement;
-            // const next_next_next = next_next.nextElementSibling as HTMLElement;
-
-            // previous.setAttribute("class", "");
-            // previous.classList.add('previous', 'slick-slide');
-            //
-            // previous_previous.setAttribute("class", "");
-            //
-            // previous_previous_previous.setAttribute("class", "");
-            // previous_previous_previous.classList.add('previous-previous-previous', 'slick-slide');
-            //
-            // next.setAttribute("class", "");
-            // next.classList.add('next', 'slick-slide');
-            //
-            // next_next.setAttribute("class", "");
-            // next_next.classList.add('next-next', 'slick-slide');
-            //
-            // next_next_next.setAttribute("class", "");
-            // next_next_next.classList.add('next-next-next', 'slick-slide');
-        }, 100);
+        }, 10);
     }, [slideIndex]);
 
     useEffect(() => {
@@ -107,14 +90,14 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                             className="picture"
                             key={elem}
                             src={templates(elem).default}
-                            alt={`${TEXT[i].title} Саша Стюхин Пейзажист`}
+                            alt={TEXT[i] ? TEXT[i].title : 'Саша Стюхин Пейзажист'}
                         />
                         <div className="pictureBorder" />
                     </div>
                 </div>
 
-                {!open && (
-                    <div className="textBlock">
+                {(!open && TEXT[i]) && (
+                    <div className={textBlock_class}>
                         <div className="title">{TEXT[i].title}</div>
                         <div className="location">{TEXT[i].location}</div>
                     </div>
@@ -123,11 +106,15 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
         ));
     };
 
+    const gallery_class = cn('gallerySlider')({"type": type.toLowerCase()}, [open ? 'blurred' : undefined]);
+    const input_class = cn('input')({"type": type.toLowerCase()});
+    const textBlock_class = cn('textBlock')({"type": type.toLowerCase()});
+
     return (
         <>
             <div
                 {...rest}
-                className={classNames('gallerySlider', open && 'blurred')}
+                className={gallery_class}
                 ref={ref}
             >
                 <div className="pictureBg" />
@@ -160,24 +147,27 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                 >
                     {renderGalleryItems()}
                 </Swiper>
-
-                {!open && (
-                    <input
-                        onChange={(e) => swiper.slideTo(Number(e.target.value), based_animation_transition)}
-                        value={slideIndex}
-                        type="range"
-                        min={0}
-                        max={amount_of_pictures}
-                        style={{ width: `${input_width}px` }}
-                    />
-                )}
             </div>
+
+            {!open && (
+                <input
+                    className={input_class}
+                    onChange={(e) => swiper.slideTo(Number(e.target.value), based_animation_transition)}
+                    value={slideIndex}
+                    type="range"
+                    min={0}
+                    max={amount_of_pictures}
+                    // style={{ width: `${input_width}px` }} //@todo мб убрать
+                />
+            )}
+
             <Modal
                 parentClass="gallerySlider"
                 slideIndex={slideIndex}
                 templates={templates}
                 open={modalOpened}
                 setOpen={showModal}
+                type={type}
             />
         </>
     );

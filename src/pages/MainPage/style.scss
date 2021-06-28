@@ -46,7 +46,7 @@
       display: block;
     }
 
-    @include tablet {
+    @include mobile_and_tablet {
       display: none;
     }
   }

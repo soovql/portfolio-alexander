@@ -25,7 +25,7 @@ const Email = React.forwardRef<HTMLInputElement, EmailProps> (function Email(pro
     // const onSubmit = (data: any) => console.log(data);
     return (
         <div
-            className={blockClass('form')}
+            className={blockClass('form', ['step'])}
             {...rest}
         >
             <input

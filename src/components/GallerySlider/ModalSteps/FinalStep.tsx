@@ -10,7 +10,7 @@ const FinalStep: React.FC<FinalStepProps> = (props) => {
     const blockClass = cn(parentClass);
 
     return (
-        <div className={blockClass('final')}>
+        <div className={blockClass('final',['step'])}>
             спасибо!
         </div>
     );

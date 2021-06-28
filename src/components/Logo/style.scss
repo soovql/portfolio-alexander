@@ -2,11 +2,7 @@
 @import '../../styles/animation.scss';
 
 a.logo {
-  width: 112px;
-  height: 90px;
   position: absolute;
-  top: 65px;
-  left: 65px;
   opacity: 1;
   visibility: visible;
   transition: visibility $animation_duration_in, opacity $animation_duration_in linear;
@@ -18,16 +14,34 @@ a.logo {
     transition-timing-function: linear;
   }
 
+  @include desktop {
+    top: 66px;
+    left: 66px;
+
+    svg {
+      width: 112px;
+      height: 90px;
+    }
+  }
+
   @include tablet {
-    top: 65px;
-    left: 65px;
+    top: 66px;
+    left: 66px;
+
+    svg {
+      width: 112px;
+      height: 90px;
+    }
   }
 
   @include mobile {
-    top: 40px;
-    left: 40px;
-    width: 84px;
-    height: 66px;
+    top: 41px;
+    left: 41px;
+
+    svg {
+      width: 84px;
+      height: 66px;
+    }
   }
 
   &_isHidden {
