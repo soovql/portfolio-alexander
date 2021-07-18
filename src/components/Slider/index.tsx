@@ -28,9 +28,9 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(pr
 
     let templates: any;
     if (window.innerWidth < 599) {
-        templates = require.context('../../styles/images/gallery/mobile/', true, /\.(jpg|jpeg)$/);
+        templates = require.context('../../gallery/main_page/mobile/', true, /\.(jpg|jpeg)$/);
     } else {
-        templates = require.context('../../styles/images/gallery/desktop/', true, /\.(jpg|jpeg)$/);
+        templates = require.context('../../gallery/main_page/desktop/', true, /\.(jpg|jpeg)$/);
     }
 
     const slickSettings: Settings = {
@@ -93,7 +93,9 @@ const Slider = React.forwardRef<HTMLDivElement, ISliderProps>(function Slider(pr
 
     return (
         <div {...rest} className={classNames('slider', open && 'blurred')} ref={ref}>
-            <Slick {...slickSettings}>{renderItems()}</Slick>
+            <Slick {...slickSettings}>
+                {renderItems()}
+            </Slick>
         </div>
     );
 });

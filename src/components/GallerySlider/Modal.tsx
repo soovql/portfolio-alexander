@@ -36,14 +36,14 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
     const current_image = templates(templates.keys()[current_item]).default;
     const name_of_pic = `./${current_item + 1}.jpg`;
     //проверяем, что у фотографии есть горизональное отображение
-    const horizontal = require.context('../../styles/images/nature/horizontal/', true, /\.(jpg|jpeg)$/) as any;
+    const horizontal = require.context('../../gallery/nature/horizontal/', true, /\.(jpg|jpeg)$/) as any;
     const has_horizontal = horizontal.keys().includes(name_of_pic);
     let horizontal_image;
     has_horizontal ? horizontal_image =
         <img className={image_class(null, ['hidden'])} id="horizontal" src={`${horizontal(name_of_pic).default}`} alt=""/>
         : undefined;
     //проверяем, что есть зум, хотя он должен быть всегда
-    const zoomed = require.context('../../styles/images/nature/zoomed/', true, /\.(jpg|jpeg)$/) as any;
+    const zoomed = require.context('../../gallery/nature/zoomed/', true, /\.(jpg|jpeg)$/) as any;
     const has_zoom = zoomed.keys().includes(name_of_pic);
     let zoomed_image;
     has_zoom ? zoomed_image =

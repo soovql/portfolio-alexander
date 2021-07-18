@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import LazyLoad from 'react-lazyload';
 import { useEffect, useState } from 'react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { Modal } from './Modal';
 import { GalleryTypes } from '../../GalleryTypes';
 import * as NATURE_DATA from '../../nature.json';
 import * as CITY_DATA from '../../city.json';
-
+import {useSwipeable} from "react-swipeable";
 
 SwiperCore.use([Pagination, Navigation]);
 
 type IGallerySliderProps = {
     templates: { (arg0: number): { (): any; new (): any; default: string | undefined }; keys: () => number[] };
     open: boolean;
-    setActive: (v: number) => void;
+    setActive: (v: React.SetStateAction<number>) => void;
     type: GalleryTypes;
 };
 
@@ -26,14 +27,23 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
     const total_amount = templates.keys().length;
     const amount_of_pictures = total_amount - 1;
     const based_animation_transition = 500;
-    // считаем длину и передаем её в css инпута
-    // const input_width = 22 * total_amount;
 
     const [slideIndex, setSlideIndex] = useState(initial_slide);
     const [swiper, setSwiper] = useState<any>(null);
     const [modalOpened, showModal] = useState(false);
 
     const TEXT = (type === "City" ? CITY_DATA : NATURE_DATA);
+
+    //SWIPE FOR THE BORDER FRAME
+    const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            swiper.slideTo(swiper.realIndex + 1);
+        },
+        onSwipedRight: () => {
+            swiper.slideTo(swiper.realIndex - 1);
+        },
+    });
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -51,8 +61,10 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                 }
                 previous_previous = previous.previousSibling as HTMLElement;
                 previous_previous?.classList.add('swiper-slide-prev-prev');
-                previous_previous_previous = previous_previous.previousSibling as HTMLElement;
-                previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');
+                if (previous_previous) {
+                    previous_previous_previous = previous_previous.previousSibling as HTMLElement;
+                    previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');
+                }
             }
         }, 10);
     }, [slideIndex]);
@@ -81,17 +93,37 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
         return () => window.removeEventListener('keydown', close)
     },[showModal, modalOpened])
 
+    {
+        const arr = templates.keys();
+        arr.sort(function(a, b) {
+            return a - b;
+        });
+
+    }
     const renderGalleryItems = () => {
         return templates.keys().map((elem: number, i: number) => (
-            <SwiperSlide key={i} virtualIndex={i}>
+            <SwiperSlide
+                key={i}
+                virtualIndex={i}
+                onClick={
+                    (el) => {
+                        if (el !== null && el.target instanceof HTMLElement) {
+                            swiper.slideTo(el.target.dataset.swiperSlideIndex);
+                        }
+                    }
+                }
+            >
                 <div className="imageContainer">
                     <div className="extraWrapper">
-                        <img
-                            className="picture"
-                            key={elem}
-                            src={templates(elem).default}
-                            alt={TEXT[i] ? TEXT[i].title : 'Саша Стюхин Пейзажист'}
-                        />
+                        <LazyLoad>
+                            <img
+                                className="picture"
+                                key={elem}
+                                src={templates(elem).default}
+                                alt={TEXT[i] ? TEXT[i].title : 'Саша Стюхин Пейзажист'}
+                                data-swiper-slide-index={i}
+                            />
+                        </LazyLoad>
                         <div className="pictureBorder" />
                     </div>
                 </div>
@@ -117,13 +149,16 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                 className={gallery_class}
                 ref={ref}
             >
-                <div className="pictureBg" />
-                <div className="pictureBorderFrame" />
+                <div
+                    className="pictureBg"
+                />
+                <div className="pictureBorderFrame" {...handlers}/>
 
                 <Swiper
                     onInit={() => runInit()}
                     onSwiper={(swiper) => setSwiper(swiper)}
-                    allowTouchMove={true}
+                    allowTouchMove={window.innerWidth < 599}
+                    simulateTouch={true}
                     initialSlide={initial_slide}
                     grabCursor={false}
                     spaceBetween={0}
@@ -134,16 +169,10 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                         setSlideIndex(swiper.realIndex);
                         setActive(swiper.realIndex);
                     }}
-                    pagination={{
-                        clickable: true,
-                    }}
-                    slideToClickedSlide={true}
-                    // включаю свайп на мобильных
-                    breakpoints={{
-                        '598': {
-                            allowTouchMove: false,
-                        },
-                    }}
+                    // pagination={{
+                    //     clickable: true,
+                    // }}
+                    // slideToClickedSlide={true}
                 >
                     {renderGalleryItems()}
                 </Swiper>
@@ -157,7 +186,6 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                     type="range"
                     min={0}
                     max={amount_of_pictures}
-                    // style={{ width: `${input_width}px` }} //@todo мб убрать
                 />
             )}
 

@@ -6,6 +6,7 @@
 @import 'pages/Order/style.scss';
 @import 'pages/Nature/style.scss';
 @import 'pages/City/style.scss';
+@import 'styles/mixins.scss';
 
 body:not(.mobile) {
   * {
@@ -21,6 +22,10 @@ body, html {
   color: #fff;
   height: 100%;
   margin: 0;
+
+  @include desktop {
+    min-height: 806px;
+  }
 }
 
 #root, .wrapper {

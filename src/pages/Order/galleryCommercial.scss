@@ -1,0 +1,13 @@
+@import '../../styles/mixins.scss';
+
+.order-slider {
+
+  @include desktop {
+    max-width: 513px;
+  }
+
+  .slider-image {
+    width: 100%;
+    height: auto;
+  }
+}

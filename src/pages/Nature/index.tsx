@@ -7,13 +7,13 @@ import { Cursor } from '../../components/Cursor';
 import { GallerySlider } from '../../components/GallerySlider';
 import { GalleryTypes } from '../../GalleryTypes';
 
-const Nature: React.FC = (props) => {
+const Nature: React.FC = () => {
     const [open, setOpen] = useState(false);
     const [activeItem, setActiveItem] = useState(0);
 
     const blockClass = 'nature';
 
-    const templates = require.context('../../styles/images/nature/gallery/', true, /\.(jpg|jpeg)$/) as any;
+    const templates = require.context('../../gallery/nature/vertical/', true, /\.(jpg|jpeg)$/) as any;
 
     return (
         <div className={blockClass}>

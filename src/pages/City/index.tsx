@@ -11,13 +11,13 @@ type Props = {
     parentClass?: string;
 };
 
-const City: React.FC<Props> = (props) => {
+const City: React.FC<Props> = () => {
     const [open, setOpen] = useState(false);
     const [activeItem, setActiveItem] = useState(0);
 
     const blockClass = 'city';
 
-    const templates = require.context('../../styles/images/city/gallery/', true, /\.(jpg|jpeg)$/) as any;
+    const templates = require.context('../../gallery/city/vertical/', true, /\.(jpg|jpeg)$/) as any;
 
     return (
         <div className={blockClass}>

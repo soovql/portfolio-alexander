@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route, withRouter, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, BrowserRouter as Router } from 'react-router-dom';
 import { Nature } from './pages/Nature';
 import { Order } from './pages/Order';
 import { City } from './pages/City';
@@ -29,17 +29,17 @@ const AnimatedSwitch = withRouter(({ location }) => (
     <TransitionGroup className={'wrapper'}>
         <CSSTransition key={location.key} classNames="slide" timeout={1000}>
             <Switch location={location}>
-                <Route path="/nature">
+                <Route exact path="/">
+                    <MainPage />
+                </Route>
+                <Route exact path="/nature">
                     <Nature />
                 </Route>
-                <Route path="/city">
+                <Route exact path="/city">
                     <City />
                 </Route>
-                <Route path="/order">
+                <Route exact path="/order">
                     <Order />
-                </Route>
-                <Route path="/">
-                    <MainPage />
                 </Route>
             </Switch>
         </CSSTransition>
@@ -47,9 +47,9 @@ const AnimatedSwitch = withRouter(({ location }) => (
 ));
 
 const App = () => (
-    <BrowserRouter>
+    <Router>
         <AnimatedSwitch />
-    </BrowserRouter>
+    </Router>
 );
 
 ReactDOM.render(
