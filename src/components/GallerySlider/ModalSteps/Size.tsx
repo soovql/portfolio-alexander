@@ -8,7 +8,6 @@ type SizeProps = {
     setUserSize: (v: number) => void;
 };
 
-
 const Size: React.FC<SizeProps> = (props) => {
     const { parentClass, current_item, setUserSize } = props;
 

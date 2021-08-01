@@ -107,6 +107,17 @@
     @include mobile {
       bottom: 50px;
     }
+
+    &.disabled {
+      color: grey; // check color
+      pointer-events: none;
+
+      a {
+        &:before {
+          background-color: grey;
+        }
+      }
+    }
   }
 
   &-back {

@@ -1,0 +1,55 @@
+@import '../../../styles/mixins.scss';
+
+.prints {
+  // @todo example height
+  height: 600px;
+
+  @include mobile_and_tablet {
+    height: 317px;
+  }
+
+  .image {
+    width: 292px;
+    height: 328px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    transition: all 750ms cubic-bezier( 0.88, -0.07, 1, 0.53 );
+
+    &.animating {
+      transition: all 750ms cubic-bezier(.164,.84,.44,1);
+    }
+
+    @include mobile_and_tablet {
+      width: 165px;
+      height: 186px;
+    }
+  }
+
+  &-image {
+
+    &Front {
+      background-image: url("styles/images/order/print/1.jpg");
+      z-index: 2;
+
+    }
+
+    &Left {
+      background-image: url("styles/images/order/print/2.jpg");
+      transform: scale(0.7);
+
+      &.animating {
+        transform: scale(1) translatex(-39%) translatey(14%) rotate(-8deg);
+      }
+    }
+
+    &Right {
+      background-image: url("styles/images/order/print/3.jpg");
+      transform: scale(0.7);
+
+      &.animating {
+        transform: scale(1) translatex(38%) translatey(24%) rotate(5deg);
+      }
+    }
+  }
+}

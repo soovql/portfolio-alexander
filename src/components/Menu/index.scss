@@ -3,6 +3,12 @@
 .menu {
     color: #fff;
 
+    a.active {
+      opacity: 0.5;
+      cursor: none;
+      pointer-events: none;
+    }
+
     ul {
       display: flex;
       flex-direction: column;

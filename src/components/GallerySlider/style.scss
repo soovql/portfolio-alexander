@@ -10,7 +10,6 @@
     filter: blur(4px);
   }
 
-
   .swiper-wrapper {
     padding: 100px 0; //@todo check values
     -webkit-user-drag: none;
@@ -23,27 +22,17 @@
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    left: 50%;
-    top: -44px;
-    transform: translateX(-50%);
     width: 510px;
     height: 563px;
-    margin-top: 100px;
     z-index: -1;
+    box-shadow: -6px 5px 15px 0px rgba(0,0,0,0.54);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     @include mobile_and_tablet {
       width: 358px;
       height: 424px;
-    }
-
-    @include tablet {
-      top: -32px;
-    }
-
-    @include mobile {
-      top: -30px;
-      width: 358px;
-      height: 394px;
     }
   }
 
@@ -51,27 +40,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
-    left: 50%;
-    top: 74px;
-    transform: translateX(-50%);
-    height: 523px;
-    width: 420px;
     z-index: 100;
 
-    @include mobile_and_tablet {
-      height: 349px;
-      width: 292px;
-    }
-
-    @include tablet {
-      top: 82px;
-    }
-
-    @include mobile {
-      top: 82px;
-      height: 367px;
-      width: 296px;
-    }
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     // hover on center picture
     &:before {
@@ -104,20 +77,48 @@
   &_type_nature {
     .pictureBorderFrame {
       background-image: url("styles/images/picture_frame.png");
+      height: 523px;
+      width: 420px;
+
+      @include mobile_and_tablet {
+        height: 365px;
+        width: 294px;
+      }
     }
 
     .pictureBg {
       background-image: url("styles/images/picture_bg.png");
+      height: 523px;
+      width: 420px;
+
+      @include mobile_and_tablet {
+        height: 365px;
+        width: 294px;
+      }
     }
   }
 
   &_type_city {
     .pictureBorderFrame {
       background-image: url("styles/images/picture_frame_w.png");
+      height: 506px;
+      width: 408px;
+
+      @include mobile_and_tablet {
+        height: 358px;
+        width: 288px;
+      }
     }
 
     .pictureBg {
       background-image: url("styles/images/picture_bg_w.png");
+      height: 506px;
+      width: 408px;
+
+      @include mobile_and_tablet {
+        height: 358px;
+        width: 288px;
+      }
     }
   }
 
@@ -140,27 +141,18 @@
       height: 330px;
     }
 
-    .imageContainer {
-      transform: scale(1);
-    }
-
     .picture {
       height: 100%;
       width: 100%;
       display: block;
+      //image-rendering: pixelated; // also an option
+      transform: perspective(1px) translateZ(0); // sad hack for no blurry
+      backface-visibility: hidden;
     }
 
     &.swiper-slide-active {
       .picture {
-        -webkit-backface-visibility: hidden;
-        -ms-transform: translateZ(0); /* IE 9 */
-        -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
-        transform: translateZ(0);
-        //image-rendering: -moz-crisp-edges;          /* Firefox */
-        //image-rendering:   -o-crisp-edges;          /* Opera */
-        //image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
-        //image-rendering: crisp-edges;
-        //-ms-interpolation-mode: nearest-neighbor;
+        transform: translateZ(0); // essential for no hover in transition
         transition: 600ms filter linear;
       }
     }
@@ -170,9 +162,6 @@
       .imageContainer {
         user-select: none;
         animation: animate-preloader 1.2s linear;
-        //animation-delay: 900ms;
-        //transition: all 500ms ease-in;
-
 
         &:before {
           content: '';

@@ -1,0 +1,46 @@
+@import '../../../styles/mixins.scss';
+
+.order-slider {
+
+  @include desktop {
+    max-width: 513px;
+  }
+
+  .slider-image {
+    width: 100%;
+    height: auto;
+  }
+
+  // @to do rewrite class names
+  .order-dotWrapper {
+    // увеличивает область клика
+    &:before {
+      position:absolute;
+      content:'';
+      left: 0;
+      right: 0;
+      top: -7px;
+      bottom: -7px;
+    }
+  }
+
+  .slick-active {
+    .order-dot {
+      background-color: #000000;
+      height: 3px;
+    }
+  }
+
+  .order-dot {
+    display: inline-block;
+    vertical-align: middle;
+    width: 22px;
+    height: 1px;
+    background-color: #EDEDED;
+    border-radius: 3px;
+
+    + .order-dot {
+      margin-left: 8px;
+    }
+  }
+}

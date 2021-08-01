@@ -9,13 +9,13 @@ type Props = {
 };
 
 const OrderMenu: React.FC<Props> = (props) => {
-    const { parentClass } = props;
+    const { parentClass, auxClass } = props;
 
     const blockClass = 'orderMenu';
     const rootClass = cn(parentClass as string);
 
     return (
-        <nav className={rootClass(blockClass, [blockClass])}>
+        <nav className={rootClass(blockClass, [blockClass, auxClass])}>
             <ul>
                 <li>
                     <OrderLink text="принты" url={'#prints'} />

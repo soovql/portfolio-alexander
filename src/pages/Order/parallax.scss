@@ -1,0 +1,72 @@
+@import '../../styles/mixins.scss';
+
+.custom-class {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  right: -10%;
+  width: 120%;
+
+  .image {
+    width: 100%;
+    background-size: cover;
+  }
+
+  &.layer5 {
+
+    .image {
+      height: 755px;
+      background-image: url("styles/images/order/parallax/5.png");
+
+      @include mobile {
+        height: 600px;
+      }
+    }
+  }
+
+  &.layer4 {
+
+    .image {
+      height: 926px;
+      background-image: url("styles/images/order/parallax/4.png");
+
+      @include mobile {
+        height: 726px;
+      }
+    }
+  }
+
+  &.layer3 {
+
+    .image {
+      height: 771px;
+      background-image: url("styles/images/order/parallax/3.png");
+
+      @include mobile {
+        height: 656px;
+        background-position-x: 47%;
+      }
+    }
+  }
+
+  &.layer2 {
+
+    .image {
+      height: 601px;
+      background-image: url("styles/images/order/parallax/2.png");
+    }
+  }
+
+  &.layer1 {
+
+    .image {
+      height: 321px;
+      background-image: url("styles/images/order/parallax/1.png");
+
+      @include mobile {
+        height: 354px;
+        background-position-x: 12%;
+      }
+    }
+  }
+}

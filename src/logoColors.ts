@@ -1,3 +1,4 @@
+// цвета логотипа на главной
 export enum MainPageLogoColors {
     '#F5F9FA',
     '#75697D',
@@ -5,6 +6,7 @@ export enum MainPageLogoColors {
     '#DDE8F3',
 }
 
+// цвета бургера в верхнем правом углу на главной
 export enum MainPageBurgerColors {
     'rgba(149, 174, 181, 0.25)',
     'rgba(117, 105, 125, 0.25)',

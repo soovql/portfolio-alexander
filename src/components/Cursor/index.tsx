@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 type Props = {
-    parentClass?: string;
+    auxClass?: string;
     activeItem?: number;
 };
 
 const Cursor: React.FC<Props> = (props) => {
-    const { activeItem } = props;
+    const { activeItem, auxClass } = props;
 
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [hidden, setHidden] = useState(false);
@@ -90,6 +90,7 @@ const Cursor: React.FC<Props> = (props) => {
         <div
             className={classNames(
                 blockClass,
+                auxClass,
                 hidden && 'hidden',
                 linkHover && 'hover',
                 pictureHover && 'picture',

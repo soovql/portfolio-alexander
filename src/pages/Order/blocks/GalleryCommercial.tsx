@@ -11,7 +11,7 @@ const GalleryCommercial: React.FC<IGalleryCommercialProps> = (props) => {
 
     const blockClass = cn(parentClass);
 
-    const templates = require.context('../../styles/images/order/gallery/commercial/', true, /\.(jpg|jpeg)$/) as any;
+    const templates = require.context('../../../styles/images/order/gallery/commercial/', true, /\.(jpg|jpeg)$/) as any;
 
     const slickSettings: Settings = {
         lazyLoad: 'ondemand',
@@ -33,12 +33,7 @@ const GalleryCommercial: React.FC<IGalleryCommercialProps> = (props) => {
         },
         customPaging: function addcustomPaging(i) {
             return (
-                <a className={blockClass('customDotWrapper')}>
-                    <div className={blockClass('customDot')}>
-                        <div className={blockClass('customDotValue')} />
-                        {i + 1}
-                    </div>
-                </a>
+                <a className={blockClass('dot')}/>
             );
         },
     };

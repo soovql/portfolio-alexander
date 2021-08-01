@@ -1,26 +1,45 @@
 @import '../../components/OrderMenu/style.scss';
 @import '../../components/OrderLink/style.scss';
-@import 'galleryCommercial.scss';
+@import './blocks/galleryCommercial.scss';
+@import './blocks/prints.scss';
+@import 'parallax.scss';
 
 .order {
   background-color: #fff;
   position: relative;
-  height: 100%;
   color: #000;
-  overflow: auto;
+  overflow: hidden;
 
-  &-burger {
-    z-index: 2;
+  &-header {
+    position: relative;
+    height: 755px;
+    overflow: hidden;
 
-    @include desktop {
-      position: absolute;
-      top: 81px;
-      right: 75px;
+    @include mobile {
+      height: 600px;
+
+      &:after {
+        background: rgb(255, 255, 255);
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(198, 198, 198, 0.5) 26%, rgba(171, 171, 171, 0.5) 50%, rgba(148, 148, 148, 0.5) 77%, rgba(93, 93, 93, 0.3) 100%);
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
     }
   }
 
-  &-menuPopup {
-    background-color: #000;
+  &-burger {
+    z-index: 2;
+    position: fixed;
+
+    @include desktop {
+      //position: absolute;
+      top: 81px;
+      right: 75px;
+    }
   }
 
   &-wrapper {
@@ -29,6 +48,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    will-change: transform;
+
+    &.blurred {
+      filter: blur(4px);
+    }
   }
 
   &-sectionWrapper {
@@ -37,8 +61,15 @@
     justify-content: center;
     align-items: center;
 
+    &.reverse {
+      @include desktop {
+        flex-direction: row-reverse;
+      }
+    }
+
     @include desktop {
       padding-bottom: 305px;
+      gap: 136px;
     }
 
     @include mobile_and_tablet {
@@ -50,15 +81,26 @@
   &-textContainer {
     display: flex;
     flex-direction: column;
-
+    transition: transform 500ms ease;
   }
 
   &-imageContainer {
 
+    @include desktop {
+      width: 532px;
+    }
+
     &.shoots {
+      // @todo notng
+    }
+
+    .prints {
+      position: relative;
+      display: flex;
+      justify-content: center;
+
       @include desktop {
-        width: 531px;
-        margin-right: 136px;
+        margin-top: 100px;
       }
     }
 
@@ -71,17 +113,19 @@
   &-content {
     display: flex;
     flex-direction: column;
+    transition: transform 500ms ease-in 500ms;
+    background-color: #FFFFFF;
 
     @include desktop {
-      padding-top: 825px;
+      padding-top: 305px;
     }
 
     @include tablet {
-      padding-top: 825px;
+      padding-top: 200px;
     }
 
     @include mobile {
-      padding-top: 749px;
+      padding-top: 200px;
     }
   }
 
@@ -93,7 +137,7 @@
     letter-spacing: -0.02em;
 
     & + & {
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     span {
@@ -113,5 +157,9 @@
     display: block;
     margin-top: 13px;
     max-width: 300px;
+  }
+
+  .smoothScroll {
+    will-change: transform;
   }
 }

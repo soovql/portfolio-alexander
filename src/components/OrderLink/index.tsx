@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 type Props = {
     auxClass?: string;
@@ -14,7 +15,7 @@ const OrderLink: React.FC<Props> = (props) => {
 
     return (
         <div className={cn(blockClass)({ type: auxClass })}>
-            <a href={url}>{text}</a>
+            <AnchorLink offset={() => 200} href={url}>{text}</AnchorLink>
         </div>
     );
 };

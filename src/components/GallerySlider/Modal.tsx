@@ -29,21 +29,34 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
     const image_class = cn("modal_picture");
 
     const TEXT = (type === "City" ? CITY_DATA : NATURE_DATA);
+    const gallery_type_city = type === "City";
 
     const [buyModalOpened, openBuyModal] = useState(false);
 
     const current_item = slideIndex;
     const current_image = templates(templates.keys()[current_item]).default;
-    const name_of_pic = `./${current_item + 1}.jpg`;
+    let name_of_pic;
+    slideIndex < 10 ? name_of_pic = `./0${current_item + 1}.jpg` : name_of_pic = `./${current_item + 1}.jpg`;
+
     //проверяем, что у фотографии есть горизональное отображение
-    const horizontal = require.context('../../gallery/nature/horizontal/', true, /\.(jpg|jpeg)$/) as any;
+    let horizontal;
+    if (gallery_type_city) {
+        horizontal = require.context('../../gallery/city/horizontal/', true, /\.(jpg|jpeg)$/);
+    } else {
+        horizontal = require.context('../../gallery/nature/horizontal/', true, /\.(jpg|jpeg)$/);
+    }
     const has_horizontal = horizontal.keys().includes(name_of_pic);
     let horizontal_image;
     has_horizontal ? horizontal_image =
         <img className={image_class(null, ['hidden'])} id="horizontal" src={`${horizontal(name_of_pic).default}`} alt=""/>
         : undefined;
     //проверяем, что есть зум, хотя он должен быть всегда
-    const zoomed = require.context('../../gallery/nature/zoomed/', true, /\.(jpg|jpeg)$/) as any;
+    let zoomed;
+    if (gallery_type_city) {
+        zoomed = require.context('../../gallery/city/zoomed/', true, /\.(jpg|jpeg)$/);
+    } else {
+        zoomed = require.context('../../gallery/nature/zoomed/', true, /\.(jpg|jpeg)$/);
+    }
     const has_zoom = zoomed.keys().includes(name_of_pic);
     let zoomed_image;
     has_zoom ? zoomed_image =

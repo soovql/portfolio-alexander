@@ -5,6 +5,7 @@ import { Nature } from './pages/Nature';
 import { Order } from './pages/Order';
 import { City } from './pages/City';
 import { MainPage } from './pages/MainPage';
+import { ParallaxProvider } from "react-scroll-parallax";
 import './components/Cursor/style.scss';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import 'normalize.css';
@@ -14,6 +15,7 @@ import 'slick-carousel/slick/slick.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/swiper.scss';
 import './style.scss';
+
 
 function isTouchDevice() {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
@@ -27,7 +29,7 @@ if (isMobile) {
 
 const AnimatedSwitch = withRouter(({ location }) => (
     <TransitionGroup className={'wrapper'}>
-        <CSSTransition key={location.key} classNames="slide" timeout={1000}>
+        <CSSTransition key={location.key} classNames="slide" timeout={1500}>
             <Switch location={location}>
                 <Route exact path="/">
                     <MainPage />
@@ -47,9 +49,11 @@ const AnimatedSwitch = withRouter(({ location }) => (
 ));
 
 const App = () => (
-    <Router>
-        <AnimatedSwitch />
-    </Router>
+    <ParallaxProvider>
+        <Router>
+            <AnimatedSwitch/>
+        </Router>
+    </ParallaxProvider>
 );
 
 ReactDOM.render(

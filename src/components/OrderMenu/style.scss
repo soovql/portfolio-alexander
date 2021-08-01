@@ -4,6 +4,8 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    opacity: 1;
+    transition: opacity 250ms ease-out;
 
     @include desktop {
         top: 681px;
@@ -44,5 +46,10 @@
                 margin-top: 28px;
             }
         }
+    }
+
+    &.hidden {
+        opacity: 0;
+        transition: opacity 250ms ease-in;
     }
 }

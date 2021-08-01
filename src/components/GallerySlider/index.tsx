@@ -44,7 +44,6 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
         },
     });
 
-
     useEffect(() => {
         setTimeout(() => {
             let previous_previous;
@@ -60,7 +59,7 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                     all_slides[i].classList.remove('swiper-slide-prev-prev-prev');
                 }
                 previous_previous = previous.previousSibling as HTMLElement;
-                previous_previous?.classList.add('swiper-slide-prev-prev');
+                previous_previous.classList.add('swiper-slide-prev-prev');
                 if (previous_previous) {
                     previous_previous_previous = previous_previous.previousSibling as HTMLElement;
                     previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');

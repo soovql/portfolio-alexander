@@ -14,6 +14,12 @@ body:not(.mobile) {
     transition-property: width, height;
     z-index: 9999;
 
+    // не белый для страницы заказа
+    &.order {
+      border: 2px solid #C0C0C0;
+      background-color: transparent;
+    }
+
     &.hidden {
       opacity: 0;
     }
@@ -22,6 +28,7 @@ body:not(.mobile) {
       width: 6px;
       height: 6px;
     }
+
     &.picture {
       border: none;
       height: 28px;

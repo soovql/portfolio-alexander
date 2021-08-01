@@ -7,6 +7,8 @@ import { Size, Email, FinalStep } from "./ModalSteps";
 import * as CITY_DATA from "../../city.json";
 import * as NATURE_DATA from "../../nature.json";
 import {GalleryTypes} from "../../GalleryTypes";
+import isEmail from 'validator/lib/isEmail';
+import isMobilePhone from 'validator/lib/isMobilePhone';
 
 type IBuyModalProps = {
     open_buy: boolean;
@@ -51,10 +53,15 @@ const BuyModal = React.forwardRef<HTMLDivElement, IBuyModalProps>(function BuyMo
     const isSecond = currentStep === steps.length - 2;
     const isLast = currentStep === steps.length - 1;
 
+    // проверяем, что в инпуте больше 3 символов
+    const input_disabled = (isSecond && (!isEmail(userData, {allow_utf8_local_part: true})) && isSecond && !isMobilePhone(userData, 'ru-RU', {strictMode: false}));
+
     const handleSubmit = (userData: string, current_item: number) => {
        // time to send data
+        // @todo add handlers
        console.log(
            "контактные данные: " + userData,
+           // @todo добавить проверку на наличии заголовка и размера
            "название: " + TEXT[current_item].title,
            "размер: " + TEXT[current_item].prices[userSize].size,
            "стоимость: " + TEXT[current_item].prices[userSize].price,
@@ -78,7 +85,7 @@ const BuyModal = React.forwardRef<HTMLDivElement, IBuyModalProps>(function BuyMo
             </div>
             {!isLast &&
                 <button
-                    className={modalClass("next", ['orderLink'])}
+                    className={modalClass("next", ['orderLink', input_disabled ? 'disabled' : undefined])}
                     type="submit"
                     onClick={e => {
                         e.preventDefault();

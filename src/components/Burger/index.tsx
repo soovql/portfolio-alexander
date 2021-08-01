@@ -26,7 +26,11 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(props, re
             className={classNames(rootClass(blockClass()), blockClass(), 'link', open && 'open')}
             aria-label="Открыть меню"
             ref={ref}
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+                    setOpen(!open)
+                    parentClass === 'order' ? window.scrollTo(0, 0) : undefined
+                }
+            }
         >
             <div className={blockClass('barContainer')}>
                 <div className={blockClass('bar')} style={{ backgroundColor: burgerBarColor }} />

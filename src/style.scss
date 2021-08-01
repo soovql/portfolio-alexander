@@ -40,18 +40,14 @@ ul {
 }
 
 // slider transition
-
-.slide-enter,
-.slide-exit {
-  transition: transform 1000ms ease-out;
-}
-
 .slide-enter {
-  transform: translateY(100%);
+  transform: translateY(-100%);
+  z-index: 1;
 }
 
 .slide-enter.slide-enter-active {
   transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
 }
 
 .slide-exit {
@@ -60,16 +56,13 @@ ul {
   left: 0;
   width: 100%;
   transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
 }
 
 .slide-exit-active {
-  transform: translateY(-100%);
+  transform: translateY(100%);
 }
 
-html {
-  overflow: scroll;
-  overflow-x: hidden;
-}
 ::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
@@ -81,6 +74,5 @@ html {
 
 .img {
   -webkit-user-drag: none;
-  user-drag: none;
   user-select: none;
 }
