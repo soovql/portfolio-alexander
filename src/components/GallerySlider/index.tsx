@@ -65,7 +65,7 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                     previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');
                 }
             }
-        }, 10);
+        }, 100);
     }, [slideIndex]);
 
     useEffect(() => {
@@ -114,15 +114,13 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
             >
                 <div className="imageContainer">
                     <div className="extraWrapper">
-                        <LazyLoad>
-                            <img
-                                className="picture"
-                                key={elem}
-                                src={templates(elem).default}
-                                alt={TEXT[i] ? TEXT[i].title : 'Саша Стюхин Пейзажист'}
-                                data-swiper-slide-index={i}
-                            />
-                        </LazyLoad>
+                        <img
+                            className="picture"
+                            key={elem}
+                            src={templates(elem).default}
+                            alt={TEXT[i] ? TEXT[i].title : 'Саша Стюхин Пейзажист'}
+                            data-swiper-slide-index={i}
+                        />
                         <div className="pictureBorder" />
                     </div>
                 </div>

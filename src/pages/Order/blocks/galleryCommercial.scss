@@ -3,25 +3,13 @@
 .order-slider {
 
   @include desktop {
-    max-width: 513px;
+    width: 531px;
+    height: 317px;
   }
 
   .slider-image {
     width: 100%;
     height: auto;
-  }
-
-  // @to do rewrite class names
-  .order-dotWrapper {
-    // увеличивает область клика
-    &:before {
-      position:absolute;
-      content:'';
-      left: 0;
-      right: 0;
-      top: -7px;
-      bottom: -7px;
-    }
   }
 
   .slick-active {
@@ -41,6 +29,15 @@
 
     + .order-dot {
       margin-left: 8px;
+    }
+
+    &:before {
+      position:absolute;
+      content:'';
+      left: 0;
+      right: 0;
+      top: -7px;
+      bottom: -7px;
     }
   }
 }

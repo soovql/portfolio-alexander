@@ -2,6 +2,7 @@
 @import '../../components/OrderLink/style.scss';
 @import './blocks/galleryCommercial.scss';
 @import './blocks/prints.scss';
+@import './blocks/more.scss';
 @import 'parallax.scss';
 
 .order {
@@ -15,9 +16,15 @@
     height: 755px;
     overflow: hidden;
 
+    @include tablet {
+      height: 825px;
+    }
+
     @include mobile {
       height: 600px;
+    }
 
+    @include mobile_and_tablet {
       &:after {
         background: rgb(255, 255, 255);
         background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(198, 198, 198, 0.5) 26%, rgba(171, 171, 171, 0.5) 50%, rgba(148, 148, 148, 0.5) 77%, rgba(93, 93, 93, 0.3) 100%);
@@ -58,23 +65,46 @@
   &-sectionWrapper {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
 
-    &.reverse {
-      @include desktop {
-        flex-direction: row-reverse;
-      }
-    }
-
     @include desktop {
-      padding-bottom: 305px;
-      gap: 136px;
+      height: 760px;
     }
 
     @include mobile_and_tablet {
       flex-direction: column;
       padding-bottom: 200px;
+    }
+
+    &.reverse {
+      @include desktop {
+        flex-direction: row-reverse;
+
+        .order-textContainer {
+          align-items: flex-end;
+          margin-right: 136px;
+        }
+      }
+    }
+
+    &:not(.reverse) {
+      @include desktop {
+
+        .order-textContainer {
+          margin-left: 136px;
+        }
+
+        .order-imageContainerWrapper {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+
+    .orderLink {
+      margin-top: 10px;
     }
   }
 
@@ -82,26 +112,18 @@
     display: flex;
     flex-direction: column;
     transition: transform 500ms ease;
+
+    @include desktop {
+      width: 50%;
+    }
   }
 
   &-imageContainer {
+    position: relative;
+    height: 100%;
 
     @include desktop {
-      width: 532px;
-    }
-
-    &.shoots {
-      // @todo notng
-    }
-
-    .prints {
-      position: relative;
-      display: flex;
-      justify-content: center;
-
-      @include desktop {
-        margin-top: 100px;
-      }
+      width: 50%;
     }
 
     @include mobile_and_tablet {
@@ -110,23 +132,20 @@
     }
   }
 
+  &-moreImage {
+    background-image: url("styles/images/order/more.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 849px;
+    height: 317px;
+  }
+
+
   &-content {
     display: flex;
     flex-direction: column;
     transition: transform 500ms ease-in 500ms;
     background-color: #FFFFFF;
-
-    @include desktop {
-      padding-top: 305px;
-    }
-
-    @include tablet {
-      padding-top: 200px;
-    }
-
-    @include mobile {
-      padding-top: 200px;
-    }
   }
 
   &-text {
@@ -155,8 +174,14 @@
 
   .orderLink {
     display: block;
-    margin-top: 13px;
     max-width: 300px;
+
+    + .orderLink {
+
+      @include mobile_and_tablet {
+        margin-top: 13px;
+      }
+    }
   }
 
   .smoothScroll {

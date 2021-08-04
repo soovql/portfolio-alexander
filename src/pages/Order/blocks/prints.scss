@@ -2,7 +2,14 @@
 
 .prints {
   // @todo example height
-  height: 600px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  @include desktop {
+    margin-top: 100px;
+    height: 417px;
+  }
 
   @include mobile_and_tablet {
     height: 317px;

@@ -15,8 +15,15 @@
   &.layer5 {
 
     .image {
-      height: 755px;
       background-image: url("styles/images/order/parallax/5.png");
+
+      @include desktop {
+        height: 755px;
+      }
+
+      @include tablet {
+        height: 825px;
+      }
 
       @include mobile {
         height: 600px;
@@ -54,6 +61,10 @@
     .image {
       height: 601px;
       background-image: url("styles/images/order/parallax/2.png");
+
+      @include tablet {
+        background-position-x: 69%;
+      }
     }
   }
 
@@ -62,6 +73,11 @@
     .image {
       height: 321px;
       background-image: url("styles/images/order/parallax/1.png");
+
+      @include tablet {
+        height: 354px;
+        background-position-x: 53%;
+      }
 
       @include mobile {
         height: 354px;

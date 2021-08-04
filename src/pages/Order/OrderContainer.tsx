@@ -17,7 +17,6 @@ const OrderContainer: React.FC<Props> = (props) => {
 
     const rootClass = cn(parentClass as string);
 
-
     const [ref, percentage] = useScrollPercentage({
         threshold: 0,
     })
@@ -46,7 +45,9 @@ const OrderContainer: React.FC<Props> = (props) => {
             <div
                 className={rootClass('imageContainer', [id])}
             >
-                {children}
+                <div className={rootClass('imageContainerWrapper')}>
+                    {children}
+                </div>
             </div>
             <div
                 className={rootClass('textContainer')}
@@ -55,13 +56,15 @@ const OrderContainer: React.FC<Props> = (props) => {
                     "rotate(" + newPercentageText() + "deg)"}`
                 }}
             >
-                {typeof props.text === "string" ?
-                    <div className={rootClass('text')} dangerouslySetInnerHTML={{__html: text as string}} />
-                    :
-                    typeof text !== "string" && text?.map((item, key) => {
-                    return  <div className={rootClass('text')}  key={key} dangerouslySetInnerHTML={{__html: item}} />
-                })}
-                <OrderLink text={linkText} url={'#'} auxClass="small" />
+                <div className={rootClass('textContainerWrapper')}>
+                    {typeof props.text === "string" ?
+                        <div className={rootClass('text')} dangerouslySetInnerHTML={{__html: text as string}} />
+                        :
+                        typeof text !== "string" && text?.map((item, key) => {
+                        return  <div className={rootClass('text')}  key={key} dangerouslySetInnerHTML={{__html: item}} />
+                    })}
+                    <OrderLink text={linkText} url={'#'} auxClass="small" />
+                </div>
             </div>
         </section>
     );

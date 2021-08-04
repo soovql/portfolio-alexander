@@ -8,7 +8,7 @@ const Prints: React.FC = () => {
         inViewport
     } = useInViewport(
         myRef,
-        { threshold: 0.7},
+        { threshold: 0.8},
         { disconnectOnLeave: false },
         {}
     );
@@ -16,10 +16,17 @@ const Prints: React.FC = () => {
     const blockClass = cn('prints');
 
     return (
-        <div className={blockClass()} ref={myRef}>
-            <div className={blockClass('imageFront', ['image', inViewport ? 'animating' : undefined])}/>
-            <div className={blockClass('imageLeft', ['image', inViewport ? 'animating' : undefined])}/>
-            <div className={blockClass('imageRight', ['image', inViewport ? 'animating' : undefined])}/>
+        <div className={blockClass()}>
+            <div
+                className={blockClass('imageFront', ['image', inViewport ? 'animating' : undefined])}
+            />
+            <div
+                className={blockClass('imageLeft', ['image', inViewport ? 'animating' : undefined])}
+                ref={myRef}
+            />
+            <div
+                className={blockClass('imageRight', ['image', inViewport ? 'animating' : undefined])}
+            />
         </div>
     );
 };
