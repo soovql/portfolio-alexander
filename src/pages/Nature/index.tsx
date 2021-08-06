@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Logo } from '../../components/Logo';
-import { useState} from 'react';
+import { useState } from 'react';
 import { Burger } from '../../components/Burger';
 import { MenuPopup } from '../../components/MenuPopup';
 import { Cursor } from '../../components/Cursor';

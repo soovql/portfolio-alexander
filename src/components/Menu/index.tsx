@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { useLocation } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import classNames from 'classnames';
+
 
 type Props = {
     parentClass?: string;
@@ -16,13 +18,18 @@ const Menu: React.FC<Props> = (props) => {
     const rootClass = cn(parentClass as string);
     const linkClass = cn('link');
 
+    const { pathname } = useLocation();
+
     return (
         <nav className={classNames(rootClass(blockClass), cn(blockClass)({ type: type }))}>
             <ul>
                 <li>
                     <NavLink
                         className={linkClass({ type: auxClass })}
-                        to="/nature"
+                        to={{
+                            pathname: "/nature",
+                            state: { from: pathname }
+                        }}
                         aria-label="Перейти на страницу Пейзажи"
                     >
                         пейзажи
@@ -32,7 +39,10 @@ const Menu: React.FC<Props> = (props) => {
                 <li>
                     <NavLink
                         className={linkClass({ type: auxClass })}
-                        to="/city"
+                        to={{
+                            pathname: "/city",
+                            state: { from: pathname }
+                        }}
                         aria-label="Перейти на страницу Город"
                     >
                         город
@@ -42,7 +52,10 @@ const Menu: React.FC<Props> = (props) => {
                 <li>
                     <NavLink
                         className={linkClass({ type: auxClass })}
-                        to="/order"
+                        to={{
+                            pathname: "/order",
+                            state: { from: pathname }
+                        }}
                         aria-label="Перейти на страницу Заказы"
                     >
                         ещё

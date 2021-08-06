@@ -39,30 +39,6 @@ ul {
   margin: 0;
 }
 
-// slider transition
-.slide-enter {
-  transform: translateY(-100%);
-  z-index: 1;
-}
-
-.slide-enter.slide-enter-active {
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
-}
-
-.slide-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
-}
-
-.slide-exit-active {
-  transform: translateY(100%);
-}
-
 ::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
@@ -75,4 +51,57 @@ ul {
 .img {
   -webkit-user-drag: none;
   user-select: none;
+}
+
+
+// анимация слайдов
+
+.slide-forward-enter,
+.slide-forward-exit {
+  transition: transform 1500ms ease-out;
+}
+
+.slide-forward-enter {
+  transform: translateY(100%);
+}
+
+.slide-forward-enter.slide-forward-enter-active {
+  transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
+}
+
+.slide-forward-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
+}
+
+.slide-forward-exit-active {
+  transform: translateY(-100%);
+}
+
+.slide-backward-enter {
+  transform: translateY(-100%);
+}
+
+.slide-backward-enter.slide-backward-enter-active {
+  transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
+
+}
+
+.slide-backward-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
+}
+
+.slide-backward-exit-active {
+  transform: translateY(100%);
 }

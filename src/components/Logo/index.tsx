@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import classNames from 'classnames';
 import { ReactComponent as LogoImage } from '../../styles/images/logo.svg';
@@ -20,9 +20,17 @@ const Logo: React.FC<Props> = (props) => {
     const logoClass = classNames(rootClass(blockClass), cn(blockClass)({ isHidden }), noClick && 'noclick');
     const logo = <LogoImage fill={color || '#fff'} />;
     const logoMobile = <LogoImageMobile fill={color || '#fff'} />;
+    const { pathname } = useLocation();
 
     return (
-        <NavLink to="/" className={logoClass} title="Вернуться на главную страницу">
+        <NavLink
+            to={{
+                pathname: "/",
+                state: { from: pathname }
+            }}
+            className={logoClass}
+            title="Вернуться на главную страницу"
+        >
             {window.innerWidth < 393 ? logoMobile : logo}
         </NavLink>
     );

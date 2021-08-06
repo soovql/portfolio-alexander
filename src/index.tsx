@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Route, withRouter, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Route, withRouter, BrowserRouter as Router, useLocation } from 'react-router-dom';
 import { Nature } from './pages/Nature';
 import { Order } from './pages/Order';
 import { City } from './pages/City';
@@ -27,9 +27,51 @@ if (isMobile) {
     document.body.className = 'mobile';
 }
 
-const AnimatedSwitch = withRouter(({ location }) => (
-    <TransitionGroup className={'wrapper'}>
-        <CSSTransition key={location.key} classNames="slide" timeout={1500}>
+const AnimatedSwitch = withRouter(({ }) => {
+    interface CustomizedState {
+        from: string
+    }
+    const location = useLocation();
+    const state = location.state as CustomizedState;
+    const { from } = state;
+    const to = location.pathname;
+
+    // логика показа слайдов сверху или снизу в зависимости от порядка показа
+    // не могу придумать нормальный роутинг
+    const animationClassNames = () => {
+        if (to == '/') {
+            return "slide-backward";
+        } else if (to == "/order") {
+            return "slide-forward";
+        } else if (from == "/") {
+            return "slide-forward";
+        } else if (to == "/city" && from == "/nature") {
+            return "slide-forward";
+        } else if (to == "/nature" && from == "/city") {
+            return "slide-backward";
+        } else if (to == "/city" && from == "/") {
+            return "slide-forward";
+        }
+        else {
+            return "slide-backward";
+        }
+    };
+
+    return (
+
+    <TransitionGroup
+        className={'wrapper'}
+        childFactory={child =>
+            React.cloneElement(child, {
+                classNames: animationClassNames()
+            })
+        }
+    >
+        <CSSTransition
+            key={location.key}
+            classNames={"slide"}
+            timeout={1500}
+        >
             <Switch location={location}>
                 <Route exact path="/">
                     <MainPage />
@@ -46,7 +88,8 @@ const AnimatedSwitch = withRouter(({ location }) => (
             </Switch>
         </CSSTransition>
     </TransitionGroup>
-));
+    );
+})
 
 const App = () => (
     <ParallaxProvider>
