@@ -28,7 +28,7 @@ const Burger = React.forwardRef<HTMLDivElement, Props>(function Burger(props, re
             ref={ref}
             onClick={() => {
                     setOpen(!open)
-                    parentClass === 'order' ? window.scrollTo(0, 0) : undefined
+                    // parentClass === 'order' ? window.scrollTo(0, 0) : undefined
                 }
             }
         >

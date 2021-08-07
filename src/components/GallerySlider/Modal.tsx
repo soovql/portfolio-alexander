@@ -97,6 +97,7 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
         return () => window.removeEventListener('keydown', close)
     },[setOpen, open])
 
+    const [isActive, setActive] = useState("vertical");
 
     return (
         <div {...rest} className={classNames(rootClass(blockClass()), blockClass(), open && 'open')} ref={ref}>
@@ -117,6 +118,7 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
                                     setOpen(!open);
                                     openBuyModal(!open);
                                     showVertical();
+                                    setActive("vertical") // возвращаем значение по умолчанию, тк. при закртии модалки ничего не очищается
                                 }
                             }
                         >
@@ -131,17 +133,54 @@ const Modal = React.forwardRef<HTMLDivElement, IModalProps>(function Modal(props
                         </button>
                     </div>
 
-                    <div className={blockClass('resize_buttons', [buyModalOpened ? 'hidden' : undefined])}>
-                        <button className={button_class({type: "vertical"})} onClick={showVertical}>
+                    <div className={
+                        blockClass(
+                            'resize_buttons',
+                            [buyModalOpened ? 'hidden' : undefined])
+                    }>
+                        <button
+                            className={
+                                button_class(
+                                    {type: "vertical"},
+                                    [isActive === "vertical" ? 'active' : undefined]
+                                )
+                            }
+                            onClick={() => {
+                                showVertical()
+                                setActive("vertical")
+                            }}
+                        >
                             <VerticalButton />
                         </button>
                         {has_horizontal && (
-                            <button className={button_class({type: "horizontal"})} onClick={showHorizontal}>
+                            <button
+                                className={
+                                    button_class(
+                                        {type: "horizontal"},
+                                        [isActive == "horizontal" ? 'active' : undefined]
+                                    )
+                                }
+                                onClick={() => {
+                                    showHorizontal()
+                                    setActive("horizontal")
+                                }}
+                            >
                                 <HorizontalButton />
                             </button>
                         )}
                         {has_zoom && (
-                            <button className={button_class({type: "zoom"})} onClick={showZoomed}>
+                            <button
+                                className={
+                                    button_class(
+                                        {type: "zoom"},
+                                        [isActive == "zoomed" ? 'active' : undefined]
+                                    )
+                                }
+                                onClick={() => {
+                                    showZoomed()
+                                    setActive("zoomed")
+                                }}
+                            >
                                 <ZoomButton />
                             </button>
                         )}

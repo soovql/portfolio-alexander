@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import classNames from 'classnames';
 
-
 type Props = {
     parentClass?: string;
     auxClass?: string;

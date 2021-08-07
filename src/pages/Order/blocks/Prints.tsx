@@ -16,7 +16,7 @@ const Prints: React.FC = () => {
     const blockClass = cn('prints');
 
     return (
-        <div className={blockClass()}>
+        <div className={blockClass('wrapper')}>
             <div
                 className={blockClass('imageFront', ['image', inViewport ? 'animating' : undefined])}
             />

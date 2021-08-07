@@ -37,11 +37,6 @@ a.logo {
   @include mobile {
     top: 41px;
     left: 41px;
-
-    svg {
-      width: 84px;
-      height: 66px;
-    }
   }
 
   &_isHidden {

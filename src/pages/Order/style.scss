@@ -41,9 +41,9 @@
   &-burger {
     z-index: 2;
     position: fixed;
+    will-change: top; // fixes flickering on fast scroll over the parallax bg
 
     @include desktop {
-      //position: absolute;
       top: 81px;
       right: 75px;
     }
@@ -80,6 +80,11 @@
       @include desktop {
         flex-direction: row-reverse;
 
+        .order-imageContainer {
+          left: 136px;
+          position: relative;
+        }
+
         .order-textContainer {
           align-items: flex-end;
           margin-right: 136px;
@@ -91,7 +96,8 @@
       @include desktop {
 
         .order-textContainer {
-          margin-left: 136px;
+          left: 136px;
+          position: relative;
         }
 
         .order-imageContainerWrapper {

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import LazyLoad from 'react-lazyload';
 import { useEffect, useState } from 'react';
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { Modal } from './Modal';
 import { GalleryTypes } from '../../GalleryTypes';
+import { useSwipeable } from "react-swipeable";
 import * as NATURE_DATA from '../../nature.json';
 import * as CITY_DATA from '../../city.json';
-import {useSwipeable} from "react-swipeable";
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -65,7 +64,7 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
                     previous_previous_previous?.classList.add('swiper-slide-prev-prev-prev');
                 }
             }
-        }, 100);
+        }, 10);
     }, [slideIndex]);
 
     useEffect(() => {
@@ -153,23 +152,23 @@ const GallerySlider = React.forwardRef<HTMLDivElement, IGallerySliderProps>(func
 
                 <Swiper
                     onInit={() => runInit()}
-                    onSwiper={(swiper) => setSwiper(swiper)}
+                    onSwiper={
+                        (swiper) => {
+                            setSwiper(swiper)
+                        }
+                    }
                     allowTouchMove={window.innerWidth < 599}
                     simulateTouch={true}
                     initialSlide={initial_slide}
                     grabCursor={false}
                     spaceBetween={0}
-                    speed={1000}
+                    speed={window.innerWidth < 599 ? 500 : 1000}
                     centeredSlides={true}
                     slidesPerView="auto"
                     onSlideChange={(swiper) => {
                         setSlideIndex(swiper.realIndex);
                         setActive(swiper.realIndex);
                     }}
-                    // pagination={{
-                    //     clickable: true,
-                    // }}
-                    // slideToClickedSlide={true}
                 >
                     {renderGalleryItems()}
                 </Swiper>

@@ -1,0 +1,54 @@
+// анимация слайдов
+
+.slide-forward-enter {
+  //transform: translateY(100%);
+  transform: translate3d(0px, 100%, 0px);
+}
+
+.slide-forward-enter.slide-forward-enter-active {
+  //transform: translateY(0%);
+  transform: translate3d(0px, 0%, 0px);
+  transition: transform 1.5s cubic-bezier(0.425, 0.005, 0, 1);
+}
+
+.slide-forward-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(0%);
+  transition: transform 1.5s cubic-bezier(0.425, 0.005, 0, 1);
+}
+
+.slide-forward-exit-active {
+  //transform: translateY(-100%);
+  transform: translate3d(0px, -100%, 0px);
+}
+
+.slide-backward-enter {
+  //transform: translateY(-100%);
+  transform: translate3d(0px, -100%, 0px);
+
+}
+
+.slide-backward-enter.slide-backward-enter-active {
+  //transform: translateY(0%);
+  transform: translate3d(0px, 0%, 0px);
+  transition: transform 1.5s cubic-bezier(0.425, 0.005, 0, 1);
+}
+
+.slide-backward-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  //transform: translateY(0%);
+  transform: translate3d(0px, 0%, 0px);
+  transition: transform 1.5s cubic-bezier(0.425, 0.005, 0, 1);
+
+}
+
+.slide-backward-exit-active {
+  //transform: translateY(100%);
+  transform: translate3d(0px, 100%, 0px);
+}

@@ -7,6 +7,7 @@
 @import 'pages/Nature/style.scss';
 @import 'pages/City/style.scss';
 @import 'styles/mixins.scss';
+@import 'styles/transition-slider.scss';
 
 body:not(.mobile) {
   * {
@@ -18,7 +19,7 @@ body:not(.mobile) {
 
 body, html {
   font-family: 'Rubik', sans-serif !important;
-  background-color: #000;
+  background-color: #BBBBBB;
   color: #fff;
   height: 100%;
   margin: 0;
@@ -51,57 +52,4 @@ ul {
 .img {
   -webkit-user-drag: none;
   user-select: none;
-}
-
-
-// анимация слайдов
-
-.slide-forward-enter,
-.slide-forward-exit {
-  transition: transform 1500ms ease-out;
-}
-
-.slide-forward-enter {
-  transform: translateY(100%);
-}
-
-.slide-forward-enter.slide-forward-enter-active {
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
-}
-
-.slide-forward-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
-}
-
-.slide-forward-exit-active {
-  transform: translateY(-100%);
-}
-
-.slide-backward-enter {
-  transform: translateY(-100%);
-}
-
-.slide-backward-enter.slide-backward-enter-active {
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1), opacity 650ms ease-in;
-
-}
-
-.slide-backward-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transform: translateY(0%);
-  transition: transform 1.5s cubic-bezier(0.426, 0.006, 0, 1);
-}
-
-.slide-backward-exit-active {
-  transform: translateY(100%);
 }

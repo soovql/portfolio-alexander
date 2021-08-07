@@ -33,7 +33,7 @@ const MenuPopup = React.forwardRef<HTMLDivElement, IMenuPopupProps>(function Men
     return (
         <div {...rest} className={classNames(rootClass(blockClass()), blockClass(), open && 'open')} ref={ref}>
             <div className={blockClass('contentWrapper')}>
-                <Menu parentClass={blockClass()} auxClass={blockClass()} type="column" />
+                <Menu parentClass={blockClass()} auxClass={blockClass()} type="column"/>
                 <div className={blockClass('bottomWrapper')}>
                     <Social parentClass={blockClass()} />
                     <div className={blockClass('text')}>Фотограф Саша Стюхин</div>

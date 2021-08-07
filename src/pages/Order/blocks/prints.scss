@@ -4,15 +4,36 @@
   // @todo example height
   position: relative;
   display: flex;
-  justify-content: center;
+
+  &-wrapper {
+
+    @include mobile_and_tablet {
+      display: flex;
+      justify-content: center;
+      width: 300px;
+      height: 234px;
+    }
+  }
 
   @include desktop {
-    margin-top: 100px;
     height: 417px;
+    justify-content: flex-start;
+    align-items: center;
+
+    .order-imageContainerWrapper {
+      width: 532px;
+      height: 417px;
+    }
   }
 
   @include mobile_and_tablet {
     height: 317px;
+    justify-content: center;
+
+    .order-imageContainerWrapper {
+      width: 300px;
+      height: 234px;
+    }
   }
 
   .image {

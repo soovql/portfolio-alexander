@@ -11,6 +11,7 @@
   z-index: 3;
   visibility: hidden;
   opacity: 0;
+  transition: opacity 250ms ease-in;
 
   .hidden {
     visibility: hidden;
@@ -64,10 +65,6 @@
     object-fit: contain;
     transform: scale(0.6);
     transition: all 300ms ease-in;
-
-    //@include mobile_and_tablet {
-    //  object-fit: cover;
-    //}
 
     &#vertical {
       @include mobile_and_tablet {
@@ -180,6 +177,14 @@
     .modal_button {
       height: 28px;
       width: 28px;
+
+      &.active {
+        svg {
+          path {
+            stroke: cornflowerblue;
+          }
+        }
+      }
 
       svg:hover {
         path {

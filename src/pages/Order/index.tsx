@@ -25,13 +25,13 @@ const Order: React.FC<Props> = () => {
     return (
 
         <div
-            className={rootClass()}
+            className={rootClass({open})}
         >
             <Cursor auxClass={blockClass} />
             <Logo parentClass={blockClass} isHidden={open} />
 
             <MenuPopup parentClass={blockClass} open={open} />
-            <Burger parentClass={blockClass} open={open} setOpen={setOpen} barColor={"#424242"}/>
+            <Burger parentClass={blockClass} open={open} setOpen={setOpen} color={"#B1B1B1"} barColor={"#424242"}/>
 
             <div
                 className={rootClass('wrapper', [open ? 'blurred' : undefined])}
@@ -69,7 +69,6 @@ const Order: React.FC<Props> = () => {
                                 "Просто напишите в&nbsp;мессенджере какой вариант вам нравится и&nbsp;я&nbsp;помогу в&nbsp;оформлении."
                             ]}
                             linkText="Давай определимся"
-
                         >
                             <Prints/>
                         </OrderContainer>
