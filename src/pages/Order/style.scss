@@ -1,8 +1,7 @@
 @import '../../components/OrderMenu/style.scss';
 @import '../../components/OrderLink/style.scss';
-@import './blocks/galleryCommercial.scss';
 @import './blocks/prints.scss';
-@import './blocks/more.scss';
+@import './blocks/orderModal.scss';
 @import 'parallax.scss';
 
 .order {
@@ -68,7 +67,7 @@
     align-items: center;
 
     @include desktop {
-      height: 760px;
+      height: 726px;
     }
 
     @include mobile_and_tablet {
@@ -80,14 +79,13 @@
       @include desktop {
         flex-direction: row-reverse;
 
-        .order-imageContainer {
+        .order-prints {
           left: 136px;
-          position: relative;
         }
 
         .order-textContainer {
           align-items: flex-end;
-          margin-right: 136px;
+          margin-right: 122px;
         }
       }
     }
@@ -96,15 +94,16 @@
       @include desktop {
 
         .order-textContainer {
-          left: 136px;
+          margin-left: 110px;
           position: relative;
         }
 
-        .order-imageContainerWrapper {
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
+        .order-prints {
+          right: 124px;
+
+          .image {
+            right: 0;
+          }
         }
       }
     }
@@ -116,6 +115,7 @@
 
   &-textContainer {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     transition: transform 500ms ease;
 
@@ -124,9 +124,10 @@
     }
   }
 
-  &-imageContainer {
+  &-prints {
     position: relative;
-    height: 100%;
+    flex-shrink: 0;
+    top: -36px;
 
     @include desktop {
       width: 50%;
@@ -138,20 +139,19 @@
     }
   }
 
-  &-moreImage {
-    background-image: url("styles/images/order/more.jpg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 849px;
-    height: 317px;
-  }
-
-
   &-content {
     display: flex;
     flex-direction: column;
     transition: transform 500ms ease-in 500ms;
     background-color: #FFFFFF;
+
+    @include desktop {
+      margin-top: 62px;
+    }
+
+    @include mobile_and_tablet {
+      margin-top: 140px;
+    }
   }
 
   &-text {
@@ -181,6 +181,7 @@
   .orderLink {
     display: block;
     max-width: 300px;
+    transform: translateZ(-1px); // gets rid of fuzzy
 
     + .orderLink {
 
@@ -190,7 +191,26 @@
     }
   }
 
-  .smoothScroll {
-    will-change: transform;
+  &-buttonUp {
+    display: block;
+    position: fixed;
+    bottom: 79px;
+    right: 70px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #B1B1B1;
+    backdrop-filter: blur(4px);
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 17px;
+      width: 12px;
+      height: 12px;
+      box-shadow: -2px 2px 0 #B1B1B1;
+      transform: rotate(135deg);
+    }
   }
 }

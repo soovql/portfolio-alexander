@@ -54,8 +54,18 @@ const config: webpack.Configuration = {
                 ],
             },
             {
-                test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
-                loader: 'file-loader'
+                test: /\.(png|jpg|gif|webp)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images'
+                }
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'fonts'
+                }
             },
             {
                 test: /\.svg$/,

@@ -1,8 +1,0 @@
-@import '../../../styles/mixins.scss';
-
-.more {
-
-  @include mobile_and_tablet {
-    direction: rtl;
-  }
-}

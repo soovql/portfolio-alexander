@@ -1,19 +1,18 @@
 @import '../../../styles/mixins.scss';
 
 .prints {
-  // @todo example height
   position: relative;
   display: flex;
 
-  &-wrapper {
-
-    @include mobile_and_tablet {
-      display: flex;
-      justify-content: center;
-      width: 300px;
-      height: 234px;
-    }
-  }
+  //&-wrapper {
+  //
+  //  @include mobile_and_tablet {
+  //    display: flex;
+  //    justify-content: center;
+  //    width: 300px;
+  //    height: 234px;
+  //  }
+  //}
 
   @include desktop {
     height: 417px;
@@ -27,26 +26,29 @@
   }
 
   @include mobile_and_tablet {
-    height: 317px;
+    height: 234px;
     justify-content: center;
-
-    .order-imageContainerWrapper {
-      width: 300px;
-      height: 234px;
-    }
   }
 
   .image {
     width: 292px;
-    height: 328px;
+    height: 341px;
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    transition: all 750ms cubic-bezier( 0.88, -0.07, 1, 0.53 );
 
-    &.animating {
-      transition: all 750ms cubic-bezier(.164,.84,.44,1);
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      filter: drop-shadow(-4px 4px 10px rgba(0, 0, 0, 0.1));
     }
+
+    &.animated {
+      transition: all 750ms cubic-bezier(0.164, 0.84, 0.44, 1);
+    }
+
+    transition: all 750ms cubic-bezier( 0.88, -0.07, 1, 0.53 );
 
     @include mobile_and_tablet {
       width: 165px;
@@ -57,26 +59,33 @@
   &-image {
 
     &Front {
-      background-image: url("styles/images/order/print/1.jpg");
       z-index: 2;
-
     }
 
     &Left {
-      background-image: url("styles/images/order/print/2.jpg");
       transform: scale(0.7);
 
-      &.animating {
+      &.load {
         transform: scale(1) translatex(-39%) translatey(14%) rotate(-8deg);
       }
     }
 
     &Right {
-      background-image: url("styles/images/order/print/3.jpg");
       transform: scale(0.7);
 
-      &.animating {
+      &.load {
         transform: scale(1) translatex(38%) translatey(24%) rotate(5deg);
+      }
+    }
+
+    &.load {
+
+      &.prints-imageRight {
+        transform: scale(1) translatex(38%) translatey(24%) rotate(5deg);
+      }
+
+      .prints-imageLeft {
+        transform: scale(1) translatex(-39%) translatey(14%) rotate(-8deg);
       }
     }
   }

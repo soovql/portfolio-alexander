@@ -50,7 +50,7 @@ const config: webpack.Configuration = {
                 ],
             },
             {
-                test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
+                test: /\.(eot|woff|woff2|ttf|png|jpg|gif|webp)$/,
                 loader: 'file-loader'
             },
             {

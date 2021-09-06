@@ -1,2 +1,17 @@
 // main page
 $animation_duration_in: 500ms;
+
+@keyframes slideInDown {
+  from {
+    transform:translate3d(0, -100%, 0);
+    visibility:visible;
+  }
+  to {
+    transform:translateZ(0);
+  }
+}
+
+.slideInDown {
+  backface-visibility: visible !important;
+  animation-name: slideInDown;
+}

@@ -43,7 +43,7 @@ const Cursor: React.FC<Props> = (props) => {
 
     useEffect(() => {
         const addLinkEvents = () => {
-            document.querySelectorAll('a:not(.noclick), input, .picture').forEach((el) => {
+            document.querySelectorAll('a:not(.noclick), input, .picture, .prints-imageFront').forEach((el) => {
                 el.addEventListener('mouseover', () => setLinkHover(true));
                 el.addEventListener('mouseout', () => setLinkHover(false));
             });

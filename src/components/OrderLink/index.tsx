@@ -15,7 +15,7 @@ const OrderLink: React.FC<Props> = (props) => {
 
     return (
         <div className={cn(blockClass)({ type: auxClass })}>
-            <AnchorLink offset={() => 200} href={url}>{text}</AnchorLink>
+            <AnchorLink offset={() => 0} href={url}>{text}</AnchorLink>
         </div>
     );
 };

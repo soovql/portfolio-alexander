@@ -7,6 +7,7 @@
 @import 'pages/Nature/style.scss';
 @import 'pages/City/style.scss';
 @import 'styles/mixins.scss';
+@import 'styles/animation.scss';
 @import 'styles/transition-slider.scss';
 
 body:not(.mobile) {
@@ -26,6 +27,10 @@ body, html {
 
   @include desktop {
     min-height: 806px;
+  }
+
+  &.hidden {
+    overflow: hidden;
   }
 }
 

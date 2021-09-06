@@ -18,16 +18,13 @@ const OrderMenu: React.FC<Props> = (props) => {
         <nav className={rootClass(blockClass, [blockClass, auxClass])}>
             <ul>
                 <li>
-                    <OrderLink text="принты" url={'#prints'} />
+                    <OrderLink text="принты" url='#prints' />
                 </li>
                 <li>
-                    <OrderLink text="съемки" url={'#shoots'} />
+                    <OrderLink text="съемки" url='#shoots' />
                 </li>
                 <li>
-                    <OrderLink text="фототуры" url={'#tours'} />
-                </li>
-                <li>
-                    <OrderLink text="ещё" url={'#more'} />
+                    <OrderLink text="обучение" url='#tours' />
                 </li>
             </ul>
         </nav>

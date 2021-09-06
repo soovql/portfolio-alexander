@@ -26,6 +26,8 @@ const MenuPopup = React.forwardRef<HTMLDivElement, IMenuPopupProps>(function Men
                 modal.classList.add('animated');
                 return () => modal.classList.remove('animated');
             }, 1000);
+            const bodySel = document.body;
+            bodySel.classList.add("hidden");
         }
         return;
     }, [open]);

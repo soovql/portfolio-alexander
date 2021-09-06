@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { cn } from '@bem-react/classname';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { Logo } from '../../components/Logo';
-import { useState } from 'react';
 import { Burger } from '../../components/Burger';
 import { MenuPopup } from '../../components/MenuPopup';
 import { Cursor } from '../../components/Cursor';
 import { OrderMenu } from '../../components/OrderMenu';
-import { GalleryCommercial, Prints } from "./blocks";
-import { OrderContainer } from "./OrderContainer";
-import { Parallax } from 'react-scroll-parallax';
+import { Prints, PrintsModal, PICTURE_SETS } from './blocks';
+import { OrderContainer } from './OrderContainer';
+import { Parallax, useController } from 'react-scroll-parallax';
+
 
 type Props = {
     parentClass?: string;
@@ -16,11 +17,49 @@ type Props = {
 
 const Order: React.FC<Props> = () => {
     const [open, setOpen] = useState(false);
+    const [modalOpened, showModal] = useState(false);
+    const [pictures, setPics] = useState('');
+    const [isVisible, setIsVisible] = useState(false);
+
+    const updateState = (open: boolean):void => {
+        showModal(open);
+    }
+
+    const setPictureData = (pictures: string):void => {
+        setPics(pictures);
+    }
 
     const blockClass = 'order';
     const rootClass = cn(blockClass);
 
     const mobile = window.innerWidth < 599;
+
+    useEffect(() => {
+        // Button is displayed after scrolling for 500 pixels
+        const toggleVisibility = () => {
+            if (window.pageYOffset > 500) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+        };
+
+        window.addEventListener("scroll", toggleVisibility);
+
+        return () => window.removeEventListener("scroll", toggleVisibility);
+    }, []);
+
+    const ParallaxCache = () => {
+        const { parallaxController } = useController();
+
+        useLayoutEffect(() => {
+            const handler = () => parallaxController.update();
+            window.addEventListener('load', handler);
+            return () => window.removeEventListener('load', handler);
+        }, [parallaxController]);
+
+        return null;
+    };
 
     return (
 
@@ -28,16 +67,21 @@ const Order: React.FC<Props> = () => {
             className={rootClass({open})}
         >
             <Cursor auxClass={blockClass} />
+
             <Logo parentClass={blockClass} isHidden={open} />
 
             <MenuPopup parentClass={blockClass} open={open} />
-            <Burger parentClass={blockClass} open={open} setOpen={setOpen} color={"#B1B1B1"} barColor={"#424242"}/>
+
+            {!modalOpened &&
+                <Burger parentClass={blockClass} open={open} setOpen={setOpen} color={"#B1B1B1"} barColor={"#424242"}/>
+            }
 
             <div
                 className={rootClass('wrapper', [open ? 'blurred' : undefined])}
             >
                 <div data-scroll-speed="1">
                 <div className={rootClass('header')}>
+                    <ParallaxCache />
                     <Parallax className="custom-class layer5" y={[0, 0]}>
                         <div className="image" />
                     </Parallax>
@@ -58,59 +102,88 @@ const Order: React.FC<Props> = () => {
                 <OrderMenu parentClass={blockClass} auxClass={open ? 'hidden' : undefined}/>
 
                 <div
-                        className={rootClass('content')}
+                    className={rootClass('content')}
+                >
+                    <OrderContainer
+                        parentClass={blockClass}
+                        id="prints"
+                        auxClass="reverse"
+                        text={[
+                            "Любую из&nbsp;представленных фоторабот можно заказать как отдельным принтом, так и&nbsp;оформленную в&nbsp;багет.",
+                            "Просто напишите в&nbsp;мессенджере какой вариант вам нравится и я&nbsp;помогу в&nbsp;оформлении"
+                        ]}
+                        linkText="Хочу подобрать"
                     >
-                        <OrderContainer
+                        <Prints
                             parentClass={blockClass}
-                            auxClass="reverse"
-                            id="prints"
-                            text={[
-                                "Любую из&nbsp;представленных фоторабот можно заказать как отдельным <span>принтом</span>, так и&nbsp;оформленную в&nbsp;багет.",
-                                "Просто напишите в&nbsp;мессенджере какой вариант вам нравится и&nbsp;я&nbsp;помогу в&nbsp;оформлении."
-                            ]}
-                            linkText="Давай определимся"
-                        >
-                            <Prints/>
-                        </OrderContainer>
-
-                        <OrderContainer
-                            parentClass={blockClass}
-                            id="shoots"
-                            text={[
-                                "Я открыт к&nbsp;коммерческим заказам на&nbsp;<span>съемку</span> недвижимости с&nbsp;земли или&nbsp;воздуха, а&nbsp;также интерьеров (включая&nbsp;360).",
-                                "Примеры работ можно посмотреть в&nbsp;моём инстаграме и&nbsp;там же договориться о&nbsp;сотрудничестве."
-                                ]}
-                            linkText="Давай посмотрим"
-                        >
-                            <GalleryCommercial parentClass={blockClass}/>
-                        </OrderContainer>
-
-                        <OrderContainer
-                            parentClass={blockClass}
-                            auxClass="reverse"
-                            id="tours"
-                            text="Сейчас я&nbsp;сам езжу с&nbsp;лучшими пейзажистами в&nbsp;<span>туры</span>, чтобы набраться
-                                опыта и&nbsp;скоро буду готов проводить подобные истории. Но&nbsp;ничто не&nbsp;мешает нам
-                                с&nbsp;вами встретиться в&nbsp;Москве, чтобы я&nbsp;показал живописные и&nbsp;не&nbsp;самые
-                                очевидные уголки города."
-                            linkText="Давай прогуляемся"
+                            open={modalOpened}
+                            updateState={updateState}
+                            setPics={setPictureData}
+                            data_id="prints"
+                            pictureSet={PICTURE_SETS.prints}
                         />
+                    </OrderContainer>
 
-                        <OrderContainer
+                    <OrderContainer
+                        parentClass={blockClass}
+                        id="shoots"
+                        text={[
+                            "Я&nbsp;открыт к&nbsp;коммерческим заказам на&nbsp;съемку недвижимости с&nbsp;земли или воздуха, а&nbsp;ткаже интерьеров (включая 360).",
+                            "С&nbsp;удовольствием реализовываю коммерческие заказы, связанные с&nbsp;художественной фотографией"
+                            ]}
+                        linkText="Заказать съемку"
+                    >
+                        <Prints
                             parentClass={blockClass}
-                            id="more"
-                            text={[
-                                "Вам понравился этот <span>сайт</span> и&nbsp;вы хотите что-то подобное? Скорее всего я смогу вам помочь.",
-                                "Проработаю макет для всех экранов, продумаю анимацию, органзую процесс вёрстки и&nbsp;прикрутке к&nbsp;выбранной вами системе управления контентом сайта."
-                                ]}
-                            linkText="Давай обсудим"
-                        >
-                            <div className={rootClass('moreImage')}/>
-                        </OrderContainer>
+                            open={modalOpened}
+                            updateState={updateState}
+                            setPics={setPictureData}
+                            data_id="shoots"
+                            pictureSet={PICTURE_SETS.shoots}
+                        />
+                    </OrderContainer>
+
+                    <OrderContainer
+                        parentClass={blockClass}
+                        auxClass="reverse"
+                        id="tours"
+                        text={[
+                            "С&nbsp;удовольствием поделюсь знаниями, проведу мастер-класс или фотоэкскурсию по&nbsp;городу.",
+                            "В&nbsp;скором времени начну водить фототуры и&nbsp;по&nbsp;скрытым уголкам России и&nbsp;Европы. Напишите мне, если хотите присоединиться, расскажу про ближайшие даты"
+                        ]}
+                        linkText="Хочу познакомиться"
+                    >
+                        <Prints
+                            parentClass={blockClass}
+                            open={modalOpened}
+                            updateState={updateState}
+                            setPics={setPictureData}
+                            data_id="tours"
+                            pictureSet={PICTURE_SETS.tours}
+                        />
+                    </OrderContainer>
                     </div>
                 </div>
-
             </div>
+
+            <PrintsModal
+                parentClass={blockClass}
+                open={modalOpened}
+                updateState={updateState}
+                pictures={pictures}
+            />
+
+            {isVisible && <a
+                className={rootClass('buttonUp', ['link'])}
+                onClick={
+                    () => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+            />}
         </div>
 
     );
